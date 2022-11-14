@@ -43,7 +43,7 @@ export default function SignInForm( props) {
                 } else{
                     if (response.status === false){
                     swal({
-                        title: "Warning",
+                        title: "Atención",
                         text: "Usuario y/o Contraseña incorrectos",
                         icon:"warning",
                         timer: "2000",
