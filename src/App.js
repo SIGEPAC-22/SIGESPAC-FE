@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Alert } from "react-bootstrap";
 import SingIn from "./page/SignIn";
 import Routing from "./routes/Routing";
+import {AuthContext} from "./utils/contexts"
+import {isUserLogedApi} from "./api/auth";
 
 export default function App() {
-  const [user, setUser] = useState({name: "Jose"});
+  const [user, setUser] = useState(null);
+  const [loadUser, setloadUser] = useState(false);
+  const [refreshCheckLogin, setRefreshCheckLogin] = useState(false)
+
+  useEffect(() => {
+    setRefreshCheckLogin(false);
+    setUser(isUserLogedApi());
+    setloadUser(true);
+  }, [refreshCheckLogin]);
+
+  if(!loadUser) return null;
+  
 
   return (
-    <div>
-      {user ? (
-        <div>
-          <SingIn />
-        </div>
-      ) : (
-        <h1>No estas logeado</h1>
-      )}
-    </div>
+    <AuthContext.Provider value={user}>
+      {user ? <h1>Estas logeado</h1>:<SingIn  setRefreshCheckLogin={setRefreshCheckLogin}/>}
+    </AuthContext.Provider>
   );
 }

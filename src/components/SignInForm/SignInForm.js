@@ -2,11 +2,12 @@ import React, { useState } from 'react';
 import { Form, Button, Spinner} from 'react-bootstrap';
 import { values, size} from 'lodash'
 import swal from 'sweetalert';
-import { singInApi } from '../../api/auth'
+import { singInApi, setStatusApi } from '../../api/auth'
 
 import "./SignInForm.scss"
 
-export default function SignInForm() {
+export default function SignInForm( props) {
+    const {setRefreshCheckLogin} = props;
     const [formData, setFormData] =useState(initialFormValue());
     const[signInLoading, setSignInLoading] = useState(false);
 
@@ -32,9 +33,27 @@ export default function SignInForm() {
             setSignInLoading(true);
             singInApi(formData).then(response =>{
                 if(response.message){
-                    console.log(response.message);
+                    swal({
+                        title: "Error",
+                        text: "Fallo la conexion con el servidor",
+                        icon:"error",
+                        timer: "2000",
+                        buttons: false,
+                    })
                 } else{
-                    console.log(response.status);
+                    if (response.status === false){
+                    swal({
+                        title: "Warning",
+                        text: "Usuario y/o Contraseña incorrectos",
+                        icon:"warning",
+                        timer: "2000",
+                        buttons: false,
+                    })
+                    }else{
+                        setStatusApi(response.status);
+                        setRefreshCheckLogin(true);
+                    }
+                    
                 }
             }).catch(() =>{
                 swal({

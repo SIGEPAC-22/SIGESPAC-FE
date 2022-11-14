@@ -7,7 +7,8 @@ import BasicModal from '../../components/Modal/BasicModal';
 import SignInForm from '../../components/SignInForm';
 import "./SignIn.scss";
 
-export default function SignIn() {
+export default function SignIn(props) {
+  const {setRefreshCheckLogin} = props;
   const [showModal, setShowModal] = useState(false);
   const [contentModal, setContentModal] = useState(null);
   const openModal = content =>{
@@ -25,6 +26,7 @@ export default function SignIn() {
           <RightComponent
             openModal ={openModal}
             setShowModal = {setShowModal}
+            setRefreshCheckLogin = {setRefreshCheckLogin}
           />
       </Row>
     </Container>
@@ -47,7 +49,7 @@ function LeftComponent(){
 }
 
 function RightComponent(props){
-  const{ openModal, setShowModal} = props
+  const{ openModal, setShowModa, setRefreshCheckLogin} = props;
   return(
     <Col className='signin__right' xs={6}>
     <div>
@@ -55,7 +57,9 @@ function RightComponent(props){
       <h2>Iniciar Sesión en SIGESPAC</h2>
       <Button 
       variant='outline-primary'
-      onClick={()=> openModal(<SignInForm/>)}
+      onClick={()=> openModal(<SignInForm set setRefreshCheckLogin={setRefreshCheckLogin}/>
+      )
+    }
       >
         Iniciar Sesión
       </Button>

@@ -1,7 +1,7 @@
-import{ API_HOST } from "../utils/constant";
+import{STATUS, URL_GET_DATA_AUTH_LOGIN } from "../utils/constant";
 
 export function singInApi(user){
-    const url = `${API_HOST}/v1/sgp-access-logic-svc/getDataAuthLogin`;
+    const url = `${URL_GET_DATA_AUTH_LOGIN}`;
 
     const data ={
         ...user,
@@ -28,4 +28,26 @@ export function singInApi(user){
         return err;
     })
     
+}
+
+export function setStatusApi(status){
+    localStorage.setItem(STATUS, status);
+}
+
+export function getStatusApi(){
+    return localStorage.getItem(STATUS);
+}
+
+export function logoutApi(){
+    localStorage.removeItem(STATUS)
+}
+
+export function isUserLogedApi(){
+    const status = getStatusApi();
+
+    if (!status){
+        logoutApi();
+        return null;
+    }
+    return status;
 }
