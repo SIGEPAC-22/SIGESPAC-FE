@@ -1,11 +1,9 @@
 import React from 'react';
-import {Button} from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faHome,
     faUser,
-    faUsers,
     faClipboardList,
     faPowerOff
 } from '@fortawesome/free-solid-svg-icons'
@@ -21,7 +19,6 @@ export default function LeftMenu(props) {
     logoutApi();
     setRefreshCheckLogin(true);
   }
- 
   return (
     <div className='left-menu'>
       <img className='logo' src={LogoHES} alt='HES'/>
@@ -35,7 +32,6 @@ export default function LeftMenu(props) {
       <Link to='  ' onClick ={logout}>
       <FontAwesomeIcon icon={faPowerOff}/> Cerrar Sesión</Link>
 
-      <Button> Agregar</Button>
     </div>
   )
 }
