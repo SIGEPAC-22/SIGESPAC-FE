@@ -21,7 +21,10 @@ export default function App() {
 
   return (
     <AuthContext.Provider value={user}>
-      {user ? <h1>Estas logeado</h1>:<SingIn  setRefreshCheckLogin={setRefreshCheckLogin}/>}
+      {user ? (
+        <Routing setRefreshCheckLogin={setRefreshCheckLogin}/>
+      ):(<SingIn  setRefreshCheckLogin={setRefreshCheckLogin}/>)}
+
     </AuthContext.Provider>
   );
 }

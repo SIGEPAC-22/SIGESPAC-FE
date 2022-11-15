@@ -6,13 +6,22 @@ import {
     faHome,
     faUser,
     faUsers,
+    faClipboardList,
     faPowerOff
 } from '@fortawesome/free-solid-svg-icons'
+import { logoutApi } from '../../api/auth'
 import LogoHES from '../../assets/png/logo_hnes.png';
 
 import "./LeftMenu.scss"
 
-export default function LeftMenu() {
+export default function LeftMenu(props) {
+  const { setRefreshCheckLogin } = props;
+
+  const logout =() =>{
+    logoutApi();
+    setRefreshCheckLogin(true);
+  }
+ 
   return (
     <div className='left-menu'>
       <img className='logo' src={LogoHES} alt='HES'/>
@@ -21,8 +30,12 @@ export default function LeftMenu() {
          <FontAwesomeIcon icon={faHome}/> Inicio</Link>
       <Link to='/pacients'>
       <FontAwesomeIcon icon={faUser}/> Pacientes</Link>
-      <Link to='/loginout'>
+      <Link to='/comorbilidad'>
+      <FontAwesomeIcon icon={ faClipboardList}/> Comorbilidades</Link>
+      <Link to='  ' onClick ={logout}>
       <FontAwesomeIcon icon={faPowerOff}/> Cerrar Sesión</Link>
+
+      <Button> Agregar</Button>
     </div>
   )
 }

@@ -49,7 +49,7 @@ function LeftComponent(){
 }
 
 function RightComponent(props){
-  const{ openModal, setShowModa, setRefreshCheckLogin} = props;
+  const{ openModal, setRefreshCheckLogin} = props;
   return(
     <Col className='signin__right' xs={6}>
     <div>
@@ -57,7 +57,7 @@ function RightComponent(props){
       <h2>Iniciar Sesión en SIGESPAC</h2>
       <Button 
       variant='outline-primary'
-      onClick={()=> openModal(<SignInForm set setRefreshCheckLogin={setRefreshCheckLogin}/>
+      onClick={()=> openModal(<SignInForm setRefreshCheckLogin={setRefreshCheckLogin}/>
       )
     }
       >
