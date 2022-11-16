@@ -1,30 +1,32 @@
 import React,{Component, Fragment} from 'react';
 import {Link } from 'react-router-dom'
 import BasicLayout from '../../layout/BasicLayout'
+import{ URL_GET_ALL_COMORBILIDAD } from "../../utils/constant";
 
 import './Comorbilidad.scss'
 
-
-
 export default class Comorbilidad extends Component {
   state = {
-    getSubscribe: [],
+    getComorbilidad: [],
     isLoaded: false,
     error: null,
   };
 
   componentDidMount() {
-    fetch("http://localhost:90/v1/pr-logic-svc/getSubscribe", {
+    const url = `${URL_GET_ALL_COMORBILIDAD}`;
+    const params ={
       method: "GET",
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-    })
-      .then((response) => response.json())
+    };
+
+    fetch(url, params)
+    .then((response) => response.json())
       .then((result) => {
         this.setState({
-          getSubscribe: result,
+          getComorbilidad: result,
           isLoaded: true,
         });
       },
@@ -38,7 +40,7 @@ export default class Comorbilidad extends Component {
 }
 
   render() {
-    const { getSubscribe, isLoaded, error } = this.state;
+    const { getComorbilidad, isLoaded, error } = this.state;
 
     if(error){
       return <div>Error: {"The get request was not successful"+", "+"error: "+error.message}</div>;
@@ -67,25 +69,25 @@ export default class Comorbilidad extends Component {
                   <table class={"table table-striped table-bordered table-condensed"}>
                     <thead class={"text-center"}>
                       <tr>
-                          <th className='text-light'>Nombres</th>
-                          <th className='text-light'>Apellidos</th>
+                          <th className='text-light'>Nombre comorbilidad</th>
+                          <th className='text-light'>Descripcion comorbilidad</th>
                           <th className='text-light'>Acciones</th>
                       </tr>
                     </thead>
                     <tbody>
-                    {getSubscribe.map((s) => (
+                    {getComorbilidad.map((gt) => (
                     <tr>
-                        <td className='text-light' key={s.id}>
-                            {s.name}
+                        <td className='text-light' key={gt.id}>
+                            {gt.nameComorbidity}
                         </td>
-                        <td className='text-light' key={s.id}>
-                            {s.last_name}
+                        <td className='text-light' key={gt.id}>
+                            {gt.descriptionComorbidity}
                         </td>
                             <td>
                                 <div class={"text-center"}>
                                     <div class={"btn-group"}>
-                                        <Link className={"btn btn-primary btnEditar"} to={`/update/${s.id}`}>{"Editar"}</Link>
-                                        <Link className={"btn btn-secondary btnDetalle"} to={`/detail/${s.id}`}>{"Detalle"}</Link>
+                                        <Link className={"btn btn-primary btnEditar"} to={`/update/${gt.id}`}>{"Editar"}</Link>
+                                        <Link className={"btn btn-secondary btnDetalle"} to={`/detail/${gt.id}`}>{"Detalle"}</Link>
                                     </div>
                                 </div>
                             </td>
