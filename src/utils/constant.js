@@ -3,7 +3,7 @@ export const URL_GET_ALL_COMORBILIDAD = "http://localhost:90/v1/sgp-info-svc/get
 export const URL_GET_ONE_COMORBILIDAD = "http://localhost:90/v1/sgp-info-svc/getOneComorbidity"
 export const URL_DELETE_COMORBILIDAD = "http://localhost:92/v1/sgp-logic-svc/deleteComorbidity"
 
-export const URL_UPDATE_COMORBILIDAD = "http://localhost:90/v1/sgp-info-svc/updateComorbidity"
+export const URL_UPDATE_COMORBILIDAD = "http://localhost:92/v1/sgp-logic-svc/updateComorbidity"
 export const URL_ADD_COMORBILIDAD = "http://localhost:92/v1/sgp-logic-svc/createComorbidity"
 
 export const STATUS = "status"

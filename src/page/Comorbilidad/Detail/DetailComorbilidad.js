@@ -14,8 +14,10 @@ export default class DetailComorbilida extends Component {
     let urlNav = window.location.href;
     let saludoArray = urlNav.split("/");
     let urlNavOrigin = saludoArray[saludoArray.length - 1];
+    var id = 0;
+    id = urlNavOrigin
 
-    const url = `${URL_GET_ONE_COMORBILIDAD}?id=${urlNavOrigin}`;
+    const url = `${URL_GET_ONE_COMORBILIDAD}?id=${id}`;
 
     const params = {
       method: "GET",
