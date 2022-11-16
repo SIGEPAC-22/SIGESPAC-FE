@@ -6,12 +6,13 @@ import swal from 'sweetalert';
 
 import './UpdateComorbilidad.scss'
 export default function UpdateComorbilidad() {
-  const mostrarConfirmacion=()=>{
+
+  const mostrarConfirmacion = () => {
     swal({
       title: "Eliminar",
       text:"Estas seguro que desea elinar este registro",
       icon:"warning",
-      buttons: ["No","si"]
+      buttons: ["No","si"],
     }).then(respuesta=>{
       if(respuesta){
         swal({text: "El registro ha sido elimidado",
@@ -68,7 +69,7 @@ export default function UpdateComorbilidad() {
                             Cancelar
                           </Link>
                     
-                        <button href="#!" className="btn btn-danger ms-1" onClick={()=>mostrarConfirmacion()}>
+                        <button className="btn btn-danger ms-1">
                           Delete
                         </button>
                 
