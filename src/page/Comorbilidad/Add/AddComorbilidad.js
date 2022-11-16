@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from "react";
-import { Link, withRouter} from "react-router-dom";
+import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
 import { Form } from "react-bootstrap";
 import {URL_ADD_COMORBILIDAD} from "../../../utils/constant"
+import swal from 'sweetalert';
 
 import "./AddComorbilidad.scss";
 export default class AddComorbilidad extends Component {
@@ -17,6 +18,10 @@ export default class AddComorbilidad extends Component {
       isLoaded: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  cancel(){
+    document.getElementById("format").reset();
   }
 
   handleSubmit = (evt) => {
@@ -43,8 +48,17 @@ export default class AddComorbilidad extends Component {
             alert: { type: "alert-danger", message: data.error.message },
           });
         } else {
-          this.setState({
-            alert: { type: "alert-success", message: "Changes saved!" },
+          this.cancel();
+          this.setState(()=>{
+            swal({
+              title: "Exito al Guardar",
+              text: "Se agrego correctamente el registro de comorbilidad",
+              icon:"success",
+              timer: "2000",
+              buttons: false,
+          }).then(function(){
+            window.location="/comorbilidad"
+          })
           });
         }
       });
@@ -61,7 +75,6 @@ export default class AddComorbilidad extends Component {
   }
 
   render() {
-
     let { comorbilidad, isLoaded } = this.state;
     if (!isLoaded) {
       return <p>Loading...</p>;
@@ -77,7 +90,7 @@ export default class AddComorbilidad extends Component {
                 <br />
                 <div className="card-header">
                   <div className="card-body shadow-lg p-3">
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} id="format">
                       <div className="form-group">
                         <Form.Group>
                           <Form.Control
@@ -86,6 +99,7 @@ export default class AddComorbilidad extends Component {
                             placeholder="nombre comorbilidad"
                             onChange={""}
                             defaultValue={comorbilidad.nameComorbidity}
+                            ref="fieldNameComorbidity"
                           />
                         </Form.Group>
                         <Form.Group>

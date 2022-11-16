@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
 import { URL_GET_ONE_COMORBILIDAD } from "../../../utils/constant";
 import "./DetailComorbilidad.scss";
@@ -90,6 +91,7 @@ export default class DetailComorbilida extends Component {
                       {getOneComorbilidad.descriptionComorbidity}
                     </td>
                   </tr>
+                  <Link className="atras btn btn-primary" to={`/comorbilidad`}> Atrás</Link>
                 </tbody>
               </table>
             </>

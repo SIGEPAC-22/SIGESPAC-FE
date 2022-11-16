@@ -3,6 +3,9 @@ import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
 import { Form } from "react-bootstrap";
 import { confirmAlert } from "react-confirm-alert";
+import Alert from "../../../utils/Alert";
+import 'react-confirm-alert/src/react-confirm-alert.css'
+import swal from 'sweetalert';
 import {
   URL_UPDATE_COMORBILIDAD,
   URL_GET_ONE_COMORBILIDAD,
@@ -29,6 +32,10 @@ export default class UpdateComorbilidad extends Component {
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
+  }
+
+  cancel(){
+    document.getElementById("format").reset();
   }
 
   handleSubmit = (evt) => {
@@ -73,8 +80,16 @@ export default class UpdateComorbilidad extends Component {
             alert: { type: "alert-danger", message: data.error.message },
           });
         } else {
-          this.setState({
-            alert: { type: "alert-success", message: "Changes saved!" },
+          this.setState(()=>{
+            swal({
+              title: "Exito al Actualizar",
+              text: "Se actualizó correctamente el registro de comorbilidad",
+              icon:"success",
+              timer: "2000",
+              buttons: false,
+          }).then(function(){
+            window.location="/comorbilidad"
+          })
           });
         }
       });
@@ -160,7 +175,7 @@ export default class UpdateComorbilidad extends Component {
     };
 
     confirmAlert({
-      title: "Eliminar suscripcion?",
+      title: "Eliminar Comorbilidad",
       message: "Estas seguro?",
       buttons: [
         {
@@ -202,6 +217,10 @@ export default class UpdateComorbilidad extends Component {
     } else {
       return (
         <Fragment>
+          <Alert
+              alertType={this.state.alert.type}
+              alertMessage={this.state.alert.message}
+          />
           <BasicLayout className="updatecomorbilidad">
             <div className="addcomorbilidad__title">
               <h2>Editar Comorbilidad</h2>
@@ -211,7 +230,7 @@ export default class UpdateComorbilidad extends Component {
                 <br />
                 <div className="card-header">
                   <div className="card-body shadow-lg p-3">
-                    <form onSubmit={this.handleSubmit}>
+                    <form onSubmit={this.handleSubmit} id="format">
                       <div className="form-group">
                         <Form.Group>
                           <Form.Control
@@ -263,12 +282,12 @@ export default class UpdateComorbilidad extends Component {
                             Cancelar
                           </Link>
 
-                          <button className="btn btn-danger ms-1">
+                          <button className="btn btn-danger ms-1 button2">
                             {comorbilidad.id > 0 && (
                               <a
                                 href="#!"
+                                className="texta"
                                 onClick={() => this.confirmDelete()}
-                                className="btn btn-danger ms-1"
                               >
                                 Delete
                               </a>
