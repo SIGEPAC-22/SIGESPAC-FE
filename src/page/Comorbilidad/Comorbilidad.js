@@ -25,6 +25,9 @@ export default class Comorbilidad extends Component {
     fetch(url, params)
     .then((response) => response.json())
       .then((result) => {
+        if (result === null){
+          result = [];
+        }
         this.setState({
           getComorbilidad: result,
           isLoaded: true,

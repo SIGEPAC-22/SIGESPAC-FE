@@ -100,6 +100,7 @@ export default class AddComorbilidad extends Component {
                             onChange={""}
                             defaultValue={comorbilidad.nameComorbidity}
                             ref="fieldNameComorbidity"
+                            required
                           />
                         </Form.Group>
                         <Form.Group>
