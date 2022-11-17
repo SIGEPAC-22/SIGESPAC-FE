@@ -2,18 +2,18 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
 import { Form } from "react-bootstrap";
-import {URL_ADD_COMORBILIDAD} from "../../../utils/constant"
+import {URL_ADD_SINTOMA} from "../../../utils/constant"
 import swal from 'sweetalert';
 
-import "./AddComorbilidad.scss";
-export default class AddComorbilidad extends Component {
+import "./AddSintomas.scss";
+export default class AddSintomas extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      comorbilidad: {
-        nameComorbidity: "",
-        descriptionComorbidity: "",
+      sintoma: {
+        namesymptom: "",
+        descriptionSymptom: "",
       },
       isLoaded: false,
     };
@@ -30,7 +30,7 @@ export default class AddComorbilidad extends Component {
     const data = new FormData(evt.target);
     const payload = Object.fromEntries(data.entries());
 
-    const url = `${URL_ADD_COMORBILIDAD}`;
+    const url = `${URL_ADD_SINTOMA}`;
 
     const params = {
       method: "POST",
@@ -52,12 +52,12 @@ export default class AddComorbilidad extends Component {
           this.setState(()=>{
             swal({
               title: "Exito al Guardar",
-              text: "Se agrego correctamente el registro de comorbilidad",
+              text: "Se agrego correctamente el registro de Sintoma",
               icon:"success",
               timer: "2000",
               buttons: false,
           }).then(function(){
-            window.location="/comorbilidad"
+            window.location="/sintomas"
           })
           });
         }
@@ -66,24 +66,24 @@ export default class AddComorbilidad extends Component {
 
   componentDidMount() {
     this.setState({
-      comorbilidad: {
-        nameComorbidity: "",
-        descriptionComorbidity: "",
+      sintoma: {
+        namesymptom: "",
+        descriptionSymptom: "",
       },
       isLoaded: true,
     });
   }
 
   render() {
-    let { comorbilidad, isLoaded } = this.state;
+    let { sintoma, isLoaded } = this.state;
     if (!isLoaded) {
       return <p>Loading...</p>;
     } else {
       return (
         <Fragment>
-          <BasicLayout className="addcomorbilidad">
-            <div className="addcomorbilidad__title">
-              <h2>Agregar Comorbilidad</h2>
+          <BasicLayout className="addsintomas">
+            <div className="addsintomas__title">
+              <h2>Agregar Sintomas</h2>
             </div>
             <>
               <div className="container col-md-7">
@@ -95,20 +95,20 @@ export default class AddComorbilidad extends Component {
                         <Form.Group>
                           <Form.Control
                             type="text"
-                            name="nameComorbidity"
-                            placeholder="nombre comorbilidad"
+                            name="namesymptom"
+                            placeholder="Nombre de Sintoma"
                             onChange={""}
-                            defaultValue={comorbilidad.nameComorbidity}
+                            defaultValue={sintoma.namesymptom}
                             required
                           />
                         </Form.Group>
                         <Form.Group>
                           <Form.Control
                             type="text"
-                            name="descriptionComorbidity"
-                            placeholder="Descripcion comorbilidad"
+                            name="descriptionSymptom"
+                            placeholder="Descripcion de Sintoma"
                             onChange={""}
-                            defaultValue={comorbilidad.descriptionComorbidity}
+                            defaultValue={sintoma.descriptionSymptom}
                             required
                           />
                         </Form.Group>
@@ -116,7 +116,7 @@ export default class AddComorbilidad extends Component {
                           <hr />
                           <button className="btn btn-primary">Registrar</button>
                           <Link
-                            to="/comorbilidad"
+                            to="/sintomas"
                             className="btn btn-warning ms-1 link2"
                           >
                             Cancelar

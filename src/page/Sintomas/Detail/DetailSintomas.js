@@ -1,12 +1,12 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
-import { URL_GET_ONE_COMORBILIDAD } from "../../../utils/constant";
-import "./DetailComorbilidad.scss";
+import { URL_GET_ONE_SINTOMAS } from "../../../utils/constant";
+import "./DetailSintomas.scss";
 
-export default class DetailComorbilida extends Component {
+export default class DetailSintomas extends Component {
   state = {
-    getOneComorbilidad: {},
+    getOneSintoma: {},
     isLoaded: false,
     error: null,
   };
@@ -18,7 +18,7 @@ export default class DetailComorbilida extends Component {
     var id = 0;
     id = urlNavOrigin
 
-    const url = `${URL_GET_ONE_COMORBILIDAD}?id=${id}`;
+    const url = `${URL_GET_ONE_SINTOMAS}?id=${id}`;
 
     const params = {
       method: "GET",
@@ -33,7 +33,7 @@ export default class DetailComorbilida extends Component {
       .then(
         (result) => {
           this.setState({
-            getOneComorbilidad: result,
+            getOneSintoma: result,
             isLoaded: true,
           });
         },
@@ -46,7 +46,7 @@ export default class DetailComorbilida extends Component {
       );
   }
   render() {
-    const { getOneComorbilidad, isLoaded, error } = this.state;
+    const { getOneSintoma, isLoaded, error } = this.state;
     if (error) {
       return (
         <div>
@@ -62,13 +62,13 @@ export default class DetailComorbilida extends Component {
     } else {
       return (
         <Fragment>
-          <BasicLayout className="detailcomorbilidad">
-            <div className="detailcomorbilidad__title">
-              <h2>Detalle de {getOneComorbilidad.nameComorbidity}</h2>
+          <BasicLayout className="detailsintomas">
+            <div className="detailsintomas__title">
+              <h2>Detalle de {getOneSintoma.nameSymptom}</h2>
             </div>
             <>
               <div className="float-start text-light">
-                <h4>id: {getOneComorbilidad.id}</h4>
+                <h4>id: {getOneSintoma.id}</h4>
               </div>
               <br></br>
               <hr></hr>
@@ -77,21 +77,21 @@ export default class DetailComorbilida extends Component {
                 <tbody>
                   <tr>
                     <td className="fw-bold text-light fs-5">
-                      Nombre comorbilidad:
+                      Nombre Sintoma:
                     </td>
                     <td className="text-light fs-5">
-                      {getOneComorbilidad.nameComorbidity}
+                      {getOneSintoma.nameSymptom}
                     </td>
                   </tr>
                   <tr>
                     <td className="fw-bold text-light fs-5">
-                      Descripcion comorbilidad
+                      Descripcion Sintoma
                     </td>
                     <td className="text-light fs-5">
-                      {getOneComorbilidad.descriptionComorbidity}
+                      {getOneSintoma.descriptionSymptom}
                     </td>
                   </tr>
-                  <Link className="atras btn btn-primary" to={`/comorbilidad`}> Atrás</Link>
+                  <Link className="atras btn btn-primary" to={`/sintomas`}> Atrás</Link>
                 </tbody>
               </table>
             </>

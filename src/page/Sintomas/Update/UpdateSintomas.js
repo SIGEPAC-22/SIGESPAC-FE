@@ -7,20 +7,20 @@ import Alert from "../../../utils/Alert";
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import swal from 'sweetalert';
 import {
-  URL_UPDATE_COMORBILIDAD,
-  URL_GET_ONE_COMORBILIDAD,
-  URL_DELETE_COMORBILIDAD,
+  URL_UPDATE_SINTOMAS,
+  URL_GET_ONE_SINTOMAS,
+  URL_DELETE_SINTOMAS,
 } from "../../../utils/constant";
 
-import "./UpdateComorbilidad.scss";
-export default class UpdateComorbilidad extends Component {
+import "./UpdateSintomas.scss";
+export default class UpdateSintomas extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      comorbilidad: {
+      sintoma: {
         id: 0,
-        nameComorbidity: "",
-        descriptionComorbidity: "",
+        nameSymptom: "",
+        descriptionSymptom: "",
       },
       isLoaded: false,
       error: null,
@@ -42,8 +42,8 @@ export default class UpdateComorbilidad extends Component {
     evt.preventDefault();
 
     let errors = [];
-    if (this.state.comorbilidad.nameComorbidity === "") {
-      errors.push("nameComorbidity");
+    if (this.state.sintoma.nameSymptom === "") {
+      errors.push("nameSymptom");
     }
 
     this.setState({ errors: errors });
@@ -61,7 +61,7 @@ export default class UpdateComorbilidad extends Component {
     var id = 0;
     id = urlNavOrigin;
 
-    const url = `${URL_UPDATE_COMORBILIDAD}?id=${id}`;
+    const url = `${URL_UPDATE_SINTOMAS}?id=${id}`;
 
     const params = {
       method: "PUT",
@@ -83,12 +83,12 @@ export default class UpdateComorbilidad extends Component {
           this.setState(()=>{
             swal({
               title: "Exito al Actualizar",
-              text: "Se actualizó correctamente el registro de comorbilidad",
+              text: "Se actualizó correctamente el registro de sintoma",
               icon:"success",
               timer: "2000",
               buttons: false,
           }).then(function(){
-            window.location="/comorbilidad"
+            window.location="/sintomas"
           })
           });
         }
@@ -100,8 +100,8 @@ export default class UpdateComorbilidad extends Component {
     let value = evt.target.value;
     let name = evt.target.name;
     this.setState((prevState) => ({
-      comorbilidad: {
-        ...prevState.comorbilidad,
+      sintoma: {
+        ...prevState.sintoma,
         [name]: value,
       },
     }));
@@ -118,7 +118,7 @@ export default class UpdateComorbilidad extends Component {
     var id = 0;
     id = urlNavOrigin;
 
-    const url = `${URL_GET_ONE_COMORBILIDAD}?id=${id}`;
+    const url = `${URL_GET_ONE_SINTOMAS}?id=${id}`;
 
     const params = {
       method: "GET",
@@ -141,10 +141,10 @@ export default class UpdateComorbilidad extends Component {
         .then((result) => {
           this.setState(
             {
-              comorbilidad: {
+             sintoma: {
                 id: id,
-                nameComorbidity: result.nameComorbidity,
-                descriptionComorbidity: result.descriptionComorbidity,
+                nameSymptom: result.nameSymptom,
+                descriptionSymptom: result.descriptionSymptom,
               },
               isLoaded: true,
             },
@@ -164,7 +164,7 @@ export default class UpdateComorbilidad extends Component {
   confirmDelete = (e) => {
 
     
-    const url = `${URL_DELETE_COMORBILIDAD}?id=${this.state.comorbilidad.id}`;
+    const url = `${URL_DELETE_SINTOMAS}?id=${this.state.sintoma.id}`;
 
     const params = {
       method: "DELETE",
@@ -175,7 +175,7 @@ export default class UpdateComorbilidad extends Component {
     };
 
     confirmAlert({
-      title: "Eliminar Comorbilidad",
+      title: "Eliminar sintoma",
       message: "Estas seguro?",
       buttons: [
         {
@@ -193,7 +193,7 @@ export default class UpdateComorbilidad extends Component {
                   });
                 } else {
                   this.props.history.push({
-                    pathname: "/comorbilidad",
+                    pathname: "/sintomas",
                   });
                 }
               });
@@ -208,7 +208,7 @@ export default class UpdateComorbilidad extends Component {
   };
 
   render() {
-    let { comorbilidad, isLoaded, error } = this.state;
+    let { sintoma, isLoaded, error } = this.state;
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -221,9 +221,9 @@ export default class UpdateComorbilidad extends Component {
               alertType={this.state.alert.type}
               alertMessage={this.state.alert.message}
           />
-          <BasicLayout className="updatecomorbilidad">
-            <div className="addcomorbilidad__title">
-              <h2>Editar Comorbilidad</h2>
+          <BasicLayout className="updatesintomas">
+            <div className="addsintomas__title">
+              <h2>Editar Sintomas</h2>
             </div>
             <>
               <div className="container col-md-7">
@@ -237,24 +237,24 @@ export default class UpdateComorbilidad extends Component {
                             type="hidden"
                             name="id"
                             onChange={this.handleChange}
-                            defaultValue={comorbilidad.id}
+                            defaultValue={sintoma.id}
                           />
                         </Form.Group>
                         <Form.Group>
                           <Form.Control
                             className={
-                              this.hasError("nameComorbidity")
+                              this.hasError("nameSymptom")
                                 ? "is-invalid"
                                 : ""
                             }
                             type="text"
-                            name="nameComorbidity"
-                            placeholder="Data 2"
+                            name="nameSymptom"
+                            placeholder="Nombre Sintoma"
                             onChange={this.handleChange}
-                            defaultValue={comorbilidad.nameComorbidity}
+                            defaultValue={sintoma.nameSymptom}
                             required
                             errorDiv={
-                              this.hasError("name_conmorbility")
+                              this.hasError("nameSymptom")
                                 ? "text-danger"
                                 : "d-none"
                             }
@@ -264,10 +264,10 @@ export default class UpdateComorbilidad extends Component {
                         <Form.Group>
                           <Form.Control
                             type="text"
-                            name="descriptionComorbidity"
-                            placeholder="Data 3"
+                            name="descriptionSymptom"
+                            placeholder="Descripcion de sintoma"
                             onChange={this.handleChange}
-                            defaultValue={comorbilidad.descriptionComorbidity}
+                            defaultValue={sintoma.descriptionSymptom}
                             required
                           />
                         </Form.Group>
@@ -278,14 +278,14 @@ export default class UpdateComorbilidad extends Component {
                             Editar
                           </button>
                           <Link
-                            to="/comorbilidad"
+                            to="/sintomas"
                             className="btn btn-warning ms-1 link2"
                           >
                             Cancelar
                           </Link>
 
                           <button className="btn btn-danger ms-1 button2">
-                            {comorbilidad.id > 0 && (
+                            {sintoma.id > 0 && (
                               <a
                                 href="#!"
                                 className="texta"

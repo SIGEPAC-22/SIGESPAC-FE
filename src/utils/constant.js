@@ -6,4 +6,11 @@ export const URL_DELETE_COMORBILIDAD = "http://localhost:92/v1/sgp-logic-svc/del
 export const URL_UPDATE_COMORBILIDAD = "http://localhost:92/v1/sgp-logic-svc/updateComorbidity"
 export const URL_ADD_COMORBILIDAD = "http://localhost:92/v1/sgp-logic-svc/createComorbidity"
 
+export const URL_GET_ALL_SINTOMAS = "http://localhost:90/v1/sgp-info-svc/getSymptom"
+export const URL_ADD_SINTOMA = "http://localhost:92/v1/sgp-logic-svc/createSymptom"
+export const URL_GET_ONE_SINTOMAS = "http://localhost:90/v1/sgp-info-svc/getOneSymptom"
+export const URL_UPDATE_SINTOMAS = "http://localhost:92/v1/sgp-logic-svc/updateSymptom"
+export const URL_DELETE_SINTOMAS = "http://localhost:92/v1/sgp-logic-svc/deleteSymptom"
+
+
 export const STATUS = "status"
