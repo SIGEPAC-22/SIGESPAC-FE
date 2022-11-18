@@ -8,8 +8,23 @@ import Sintomas from "../page/Sintomas";
 import AddSintomas from "../page/Sintomas/Add/AddSintomas";
 import DetailSintomas from "../page/Sintomas/Detail/DetailSintomas";
 import UpdateSintomas from "../page/Sintomas/Update/UpdateSintomas";
+import Pacientes from "../page/Pacientes";
+import DetailPacientes from "../page/Pacientes/Detail/DetailPacientes";
 
 export default[
+    {
+        path: "/detailpaciente/:id",
+        exact:true,
+        page: DetailPacientes
+
+    },
+    {
+        path: "/pacientes",
+        exact:true,
+        page: Pacientes
+        
+        
+    },
     {
         path: "/updatesintoma/:id",
         exact:true,

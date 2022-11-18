@@ -25,7 +25,7 @@ export default function LeftMenu(props) {
 
       <Link to='/'>
          <FontAwesomeIcon icon={faHome}/> Inicio</Link>
-      <Link to='/pacients'>
+      <Link to='/pacientes'>
       <FontAwesomeIcon icon={faUser}/> Pacientes</Link>
       <Link to='/comorbilidad'>
       <FontAwesomeIcon icon={ faClipboardList}/> Comorbilidades</Link>
