@@ -14,6 +14,8 @@ export const URL_DELETE_SINTOMAS = "http://localhost:92/v1/sgp-logic-svc/deleteS
 
 export const URL_GET_ALL_PACIENTES = "http://localhost:90/v1/sgp-info-svc/getInfoPatient"
 export const URL_GET_ONE_PACIENTES = "http://localhost:90/v1/sgp-info-svc/getOneInfoPatient"
+export const URL_ADD_PACIENTES = "http://localhost:92/v1/sgp-logic-svc/createComorbidity"
+
 
 
 export const STATUS = "status"

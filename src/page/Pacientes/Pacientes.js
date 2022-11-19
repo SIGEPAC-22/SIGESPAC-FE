@@ -69,7 +69,7 @@ export default class Pacientes extends Component {
             <div class={"container"}>
               <div class={"row"}>
                 <div class={"col-lg-12"}>
-                  <Link className={"btn btn-success"} to={`/add`}>
+                  <Link className={"btn btn-success"} to={`/addpaciente`}>
                     {"Agregar"}
                   </Link>
                 </div>

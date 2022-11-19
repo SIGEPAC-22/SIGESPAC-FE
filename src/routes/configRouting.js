@@ -10,8 +10,14 @@ import DetailSintomas from "../page/Sintomas/Detail/DetailSintomas";
 import UpdateSintomas from "../page/Sintomas/Update/UpdateSintomas";
 import Pacientes from "../page/Pacientes";
 import DetailPacientes from "../page/Pacientes/Detail/DetailPacientes";
+import AddPacientes from "../page/Pacientes/Add/AddPacientes";
 
 export default[
+    {
+        path: "/addpaciente",
+        exact:true,
+        page: AddPacientes
+    },
     {
         path: "/detailpaciente/:id",
         exact:true,
