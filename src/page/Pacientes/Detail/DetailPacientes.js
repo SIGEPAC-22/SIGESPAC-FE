@@ -80,7 +80,7 @@ export default class DetailPacientes extends Component {
                       Nombre :
                     </td>
                     <td className="text-light fs-5">
-                      {getOnePaciente.firstName} {getOnePaciente.lastName}
+                      {getOnePaciente.firstName} {getOnePaciente.secondName}
                     </td>
                   </tr>
                   <tr>
@@ -88,7 +88,7 @@ export default class DetailPacientes extends Component {
                       Apellidos:
                     </td>
                     <td className="text-light fs-5">
-                      {getOnePaciente.lastName} {getOnePaciente.lastName}
+                      {getOnePaciente.lastName} {getOnePaciente.motherLastName}
                     </td>
                   </tr>
                   <tr>

@@ -15,7 +15,7 @@ import UpdatePaciente from "../page/Pacientes/Update/UpdatePaciente";
 
 export default[
     {
-        path: "/updatepaciente",
+        path: "/updatepaciente/:id",
         exact:true,
         page: UpdatePaciente
     },
