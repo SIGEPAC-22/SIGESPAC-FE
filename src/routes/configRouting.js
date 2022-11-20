@@ -11,8 +11,14 @@ import UpdateSintomas from "../page/Sintomas/Update/UpdateSintomas";
 import Pacientes from "../page/Pacientes";
 import DetailPacientes from "../page/Pacientes/Detail/DetailPacientes";
 import AddPacientes from "../page/Pacientes/Add/AddPacientes";
+import UpdatePaciente from "../page/Pacientes/Update/UpdatePaciente";
 
 export default[
+    {
+        path: "/updatepaciente",
+        exact:true,
+        page: UpdatePaciente
+    },
     {
         path: "/addpaciente",
         exact:true,

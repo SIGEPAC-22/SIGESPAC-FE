@@ -118,7 +118,7 @@ export default class Pacientes extends Component {
                                 <div class={"btn-group"}>
                                   <Link
                                     className={"btn btn-primary btnEditar"}
-                                    to={`/update/${gt.id}`}
+                                    to={`/updatepaciente/${gt.id}`}
                                   >
                                     {"Editar"}
                                   </Link>

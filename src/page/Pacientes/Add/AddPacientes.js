@@ -373,7 +373,7 @@ export default class AddPacientes extends Component {
                           <hr />
                           <button className="btn btn-primary">Registrar</button>
                           <Link
-                            to="/comorbilidad"
+                            to="/pacientes"
                             className="btn btn-warning ms-1 link2"
                           >
                             Cancelar
