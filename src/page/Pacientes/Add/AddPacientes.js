@@ -25,7 +25,7 @@ export default class AddPacientes extends Component {
         department: "",
         patientSex: "",
         pregnant: "",
-        foreign:"",
+        foreign: "",
       },
       isLoaded: false,
       typeDocument: [],
@@ -64,18 +64,47 @@ export default class AddPacientes extends Component {
           });
         } else {
           this.cancel();
-          this.setState(() => {
-            swal({
-              title: "Exito al Guardar",
-              text: "Se agrego correctamente el registro de pacientes",
-              icon: "success",
-              timer: "2000",
-              buttons: false,
-            }).then(function () {
-              window.location = "/pacientes";
+          if (data.responseCode === 200) {
+            this.setState(() => {
+              swal({
+                title: "Exito al Guardar",
+                text: "Se agrego correctamente el registro de pacientes",
+                icon: "success",
+                timer: "2000",
+                buttons: false,
+              }).then(function () {
+                window.location = "/pacientes";
+              });
             });
-          });
+          } else {
+            this.setState(() => {
+              swal({
+                title: "Error al Guardar",
+                text: "Error el registro no se realizo con exito, intentelo, nuevamente",
+                icon: "error",
+                timer: "2000",
+                buttons: false,
+              }).then(function () {
+                window.location = "/pacientes";
+              });
+            });
+          }
         }
+      })
+      .catch((error) => {
+        this.setState(() => {
+          swal({
+            title: "Error",
+            text:
+              "No hubo comunicacion exitosa con el servidor, intentelo nuevamente " +
+              "Error:" +
+              error,
+            icon: "error",
+            button: "OK",
+          }).then(function () {
+            window.location = "/pacientes";
+          });
+        });
       });
   };
 
@@ -96,7 +125,7 @@ export default class AddPacientes extends Component {
         department: "",
         patientSex: "",
         pregnant: "",
-        foreign:"",
+        foreign: "",
       },
       isLoaded: true,
     });
@@ -127,22 +156,19 @@ export default class AddPacientes extends Component {
   }
 
   handleCheckbox = (event) => {
-
-    if (!event.target.checked){
-      this.setState({event: "",})
-    }else{
-      this.setState({event: "si",})
+    if (!event.target.checked) {
+      this.setState({ event: "" });
+    } else {
+      this.setState({ event: "si" });
     }
     console.log(this.state.paciente.pregnant);
   };
 
-
   handleCheckboxForeign = (Foreign) => {
-
-    if (!Foreign.target.checked){
-      this.setState({Foreign: "",})
-    }else{
-      this.setState({Foreign: "si",})
+    if (!Foreign.target.checked) {
+      this.setState({ Foreign: "" });
+    } else {
+      this.setState({ Foreign: "si" });
     }
     console.log(this.state.paciente.foreign);
   };
@@ -197,7 +223,6 @@ export default class AddPacientes extends Component {
                             placeholder="Segundo nombre"
                             onChange={""}
                             defaultValue={paciente.secondName}
-                            required
                           />
                         </Form.Group>
                         <Form.Group>
@@ -217,7 +242,6 @@ export default class AddPacientes extends Component {
                             placeholder="Segundo apellido"
                             onChange={""}
                             defaultValue={paciente.lastSecondName}
-                            required
                           />
                         </Form.Group>
                         <Form.Group>
@@ -255,7 +279,6 @@ export default class AddPacientes extends Component {
                             placeholder="Número de documento"
                             onChange={""}
                             defaultValue={paciente.documentNumber}
-                            required
                           />
                         </Form.Group>
                         <Form.Group>
@@ -265,7 +288,6 @@ export default class AddPacientes extends Component {
                             placeholder="Número de celular"
                             onChange={""}
                             defaultValue={paciente.cellPhoneNumber}
-                            required
                           />
                         </Form.Group>
                         <Form.Group>
@@ -275,7 +297,6 @@ export default class AddPacientes extends Component {
                             placeholder="Número de teléfono"
                             onChange={""}
                             defaultValue={paciente.phoneNumber}
-                            required
                           />
                         </Form.Group>
                         <Form.Group>
@@ -285,7 +306,6 @@ export default class AddPacientes extends Component {
                             placeholder="Nombre del familiar responsable"
                             onChange={""}
                             defaultValue={paciente.responsibleFamily}
-                            required
                           />
                         </Form.Group>
                         <Form.Group>
@@ -295,7 +315,6 @@ export default class AddPacientes extends Component {
                             placeholder="Número de telefono del familiar responsable"
                             onChange={""}
                             defaultValue={paciente.responsibleFamilyPhoneNumber}
-                            required
                           />
                         </Form.Group>
                         <Form.Group>
