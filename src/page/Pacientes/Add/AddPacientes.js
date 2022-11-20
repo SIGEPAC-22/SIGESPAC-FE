@@ -24,18 +24,15 @@ export default class AddPacientes extends Component {
         responsibleFamilyPhoneNumber: "",
         department: "",
         patientSex: "",
-        pregnant: false,
+        pregnant: "",
+        foreign:"",
       },
       isLoaded: false,
+      typeDocument: [],
+      department: [],
+      sex: [],
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  handleCheckbox = event =>{
-    let state = this.state;
-    state.paciente[event.target.value] = event.target.checked;
-    this.setState(state);
-    console.log(this.state.paciente);
   }
 
   cancel() {
@@ -70,18 +67,18 @@ export default class AddPacientes extends Component {
           this.setState(() => {
             swal({
               title: "Exito al Guardar",
-              text: "Se agrego correctamente el registro de comorbilidad",
+              text: "Se agrego correctamente el registro de pacientes",
               icon: "success",
               timer: "2000",
               buttons: false,
             }).then(function () {
-              window.location = "/comorbilidad";
+              window.location = "/pacientes";
             });
           });
         }
       });
   };
-  
+
   componentDidMount() {
     this.setState({
       paciente: {
@@ -98,13 +95,73 @@ export default class AddPacientes extends Component {
         responsibleFamilyPhoneNumber: "",
         department: "",
         patientSex: "",
-        pregnant: false,
+        pregnant: "",
+        foreign:"",
       },
       isLoaded: true,
     });
+    fetch("http://localhost:90/v1/sgp-info-svc/getTypeDocument")
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        //console.log(response)
+        this.setState({ typeDocument: response });
+      });
+    ////////////////////////////////////////////////
+    fetch("http://localhost:90/v1/sgp-info-svc/getDepartment")
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        this.setState({ department: response });
+      });
+    //////////////////////////////////////////////////
+    fetch("http://localhost:90/v1/sgp-info-svc/getSex")
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        this.setState({ sex: response });
+      });
   }
-  
-  
+
+  handleCheckbox = (event) => {
+
+    if (!event.target.checked){
+      this.setState({event: "",})
+    }else{
+      this.setState({event: "si",})
+    }
+    console.log(this.state.paciente.pregnant);
+  };
+
+
+  handleCheckboxForeign = (Foreign) => {
+
+    if (!Foreign.target.checked){
+      this.setState({Foreign: "",})
+    }else{
+      this.setState({Foreign: "si",})
+    }
+    console.log(this.state.paciente.foreign);
+  };
+
+  handleChangeTypeDocument = (selectedOptionTypeDocument) => {
+    this.setState({
+      selectedOptionTypeDocument,
+    });
+  };
+
+  handleChangeDepartment = (selectedOptionDepartment) => {
+    this.setState({
+      selectedOptionDepartment,
+    });
+  };
+  handleChangeSex = (selectedOptionSex) => {
+    this.setState({ selectedOptionSex });
+  };
+
   render() {
     let { paciente, isLoaded } = this.state;
     if (!isLoaded) {
@@ -178,10 +235,16 @@ export default class AddPacientes extends Component {
                           <Select
                             className="Selectd"
                             name="documentType"
-                            Options={"sadsad"}
+                            options={this.state.typeDocument.map((elemento) => {
+                              return {
+                                value: `${elemento.id}`,
+                                label: `${elemento.nameTypeDocument}`,
+                              };
+                            })}
                             placeholder="Tipo de documento"
-                            onChange={""}
-                            defaultValue={""}
+                            value={this.state.selectedOptionTypeDocument}
+                            onChange={this.handleChangeTypeDocument}
+                            closeMenuOnSelect={true}
                             required
                           />
                         </Form.Group>
@@ -239,10 +302,16 @@ export default class AddPacientes extends Component {
                           <Select
                             className="Selectd"
                             name="department"
-                            Options={"sadsad"}
-                            placeholder="Seleccioné su departamento"
-                            onChange={""}
-                            defaultValue={""}
+                            options={this.state.department.map((elemento) => {
+                              return {
+                                value: `${elemento.id}`,
+                                label: `${elemento.nameDepartment}`,
+                              };
+                            })}
+                            placeholder="Seleccione departamento donde recide"
+                            value={this.state.selectedOptionDepartment}
+                            onChange={this.handleChangeDepartment}
+                            closeMenuOnSelect={true}
                             required
                           />
                         </Form.Group>
@@ -250,16 +319,36 @@ export default class AddPacientes extends Component {
                           <Select
                             className="Selectd"
                             name="patientSex"
-                            Options={"sadsad"}
+                            options={this.state.sex.map((elemento) => {
+                              return {
+                                value: `${elemento.id}`,
+                                label: `${elemento.nameSex}`,
+                              };
+                            })}
                             placeholder="Seleccioné su sexo"
-                            onChange={""}
-                            defaultValue={""}
+                            value={this.state.selectedOptionSex}
+                            onChange={this.handleChangeSex}
+                            closeMenuOnSelect={true}
                             required
                           />
                         </Form.Group>
                         <Form.Group>
+                          <label className="labeld">¿Eres extranjero?</label>
+                          <input
+                            type="checkbox"
+                            onChange={this.handleCheckboxForeign}
+                            name="foreign"
+                            value={this.state.Foreign}
+                          />
+                        </Form.Group>
+                        <Form.Group>
                           <label className="labeld">¿Estas Embarazada?</label>
-                        <input type="checkbox" onChange={this.handleCheckbox} name="paciente" value="pregnant" checked={this.state.paciente.pregnant}/>
+                          <input
+                            type="checkbox"
+                            onChange={this.handleCheckbox}
+                            name="pregnant"
+                            value={this.state.event}
+                          />
                         </Form.Group>
                         <div className="form-group column d-flex justify-content-center align-content-center ">
                           <hr />
