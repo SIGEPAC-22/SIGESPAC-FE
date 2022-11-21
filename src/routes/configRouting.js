@@ -12,8 +12,20 @@ import Pacientes from "../page/Pacientes";
 import DetailPacientes from "../page/Pacientes/Detail/DetailPacientes";
 import AddPacientes from "../page/Pacientes/Add/AddPacientes";
 import UpdatePaciente from "../page/Pacientes/Update/UpdatePaciente";
+import Personal from "../page/Personal";
+import DetailPersonal from "../page/Personal/Detail/DetailPersonal";
 
 export default[
+    {
+        path: "/detailpersonal/:id",
+        exact:true,
+        page: DetailPersonal
+    },
+    {
+        path: "/personal",
+        exact:true,
+        page: Personal
+    },
     {
         path: "/updatepaciente/:id",
         exact:true,

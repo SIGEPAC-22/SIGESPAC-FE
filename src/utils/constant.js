@@ -14,6 +14,9 @@ export const URL_PATH_SGP_LOGIC_SVC = "http://localhost:92"
 ///////////SGP-ACCESS-LOGIC-SVC///////////
 export const URL_PATH_SGP_ACCESS_LOGIC_SVC = "http://localhost:91"
 
+///////////SGP-ACCESS-LOGIC-SVC///////////
+export const URL_PATH_SGP_ACCESS_INFO_SVC = "http://localhost:93"
+
 
 export const URL_GET_DATA_AUTH_LOGIN = `${URL_PATH_SGP_ACCESS_LOGIC_SVC}/v1/sgp-access-logic-svc/getDataAuthLogin`
 export const URL_GET_ALL_COMORBILIDAD = `${URL_PATH_SGP_INFO_SVC}/v1/sgp-info-svc/getComorbidity`
@@ -33,6 +36,9 @@ export const URL_GET_ALL_PACIENTES = `${URL_PATH_SGP_INFO_SVC}/v1/sgp-info-svc/g
 export const URL_GET_ONE_PACIENTES = `${URL_PATH_SGP_INFO_SVC}/v1/sgp-info-svc/getOneInfoPatient`
 export const URL_ADD_PACIENTES = `${URL_PATH_SGP_LOGIC_SVC}/v1/sgp-logic-svc/createInfoPatient`
 export const URL_UPDATE_PACIENTES = `${URL_PATH_SGP_LOGIC_SVC}/v1/sgp-logic-svc/updateInfoPatient`
+
+export const URL_GET_ALL_PERSONAL = `${URL_PATH_SGP_ACCESS_INFO_SVC}/v1/sgp-access-info-svc/getInfoPersonal`
+export const URL_GET_ONE_PERSONAL = `${URL_PATH_SGP_ACCESS_INFO_SVC}/v1/sgp-access-info-svc/getOneInfoPersonal`
 
 
 //////////////////////////////////////////-DEV-//////////////////////////////////////////
