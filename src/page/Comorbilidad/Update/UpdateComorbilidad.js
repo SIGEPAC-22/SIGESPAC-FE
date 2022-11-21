@@ -4,8 +4,8 @@ import BasicLayout from "../../../layout/BasicLayout";
 import { Form } from "react-bootstrap";
 import { confirmAlert } from "react-confirm-alert";
 import Alert from "../../../utils/Alert";
-import 'react-confirm-alert/src/react-confirm-alert.css'
-import swal from 'sweetalert';
+import "react-confirm-alert/src/react-confirm-alert.css";
+import swal from "sweetalert";
 import {
   URL_UPDATE_COMORBILIDAD,
   URL_GET_ONE_COMORBILIDAD,
@@ -23,7 +23,6 @@ export default class UpdateComorbilidad extends Component {
         descriptionComorbidity: "",
       },
       isLoaded: false,
-      error: null,
       errors: [],
       alert: {
         type: "d-none",
@@ -31,26 +30,14 @@ export default class UpdateComorbilidad extends Component {
       },
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
   }
 
-  cancel(){
+  cancel() {
     document.getElementById("format").reset();
   }
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-
-    let errors = [];
-    if (this.state.comorbilidad.nameComorbidity === "") {
-      errors.push("nameComorbidity");
-    }
-
-    this.setState({ errors: errors });
-
-    if (errors.length > 0) {
-      return false;
-    }
 
     const data = new FormData(evt.target);
     const payload = Object.fromEntries(data.entries());
@@ -80,36 +67,20 @@ export default class UpdateComorbilidad extends Component {
             alert: { type: "alert-danger", message: data.error.message },
           });
         } else {
-          this.setState(()=>{
+          this.setState(() => {
             swal({
               title: "Exito al Actualizar",
               text: "Se actualizó correctamente el registro de comorbilidad",
-              icon:"success",
+              icon: "success",
               timer: "2000",
               buttons: false,
-          }).then(function(){
-            window.location="/comorbilidad"
-          })
+            }).then(function () {
+              window.location = "/comorbilidad";
+            });
           });
         }
       });
   };
-
-  //si no se usa borrar
-  handleChange = (evt) => {
-    let value = evt.target.value;
-    let name = evt.target.name;
-    this.setState((prevState) => ({
-      comorbilidad: {
-        ...prevState.comorbilidad,
-        [name]: value,
-      },
-    }));
-  };
-
-  hasError(key) {
-    return this.state.errors.indexOf(key) !== -1;
-  }
 
   componentDidMount() {
     let urlNav = window.location.href;
@@ -161,9 +132,7 @@ export default class UpdateComorbilidad extends Component {
     }
   }
 
-  confirmDelete = (e) => {
-
-    
+  confirmDelete = () => {
     const url = `${URL_DELETE_COMORBILIDAD}?id=${this.state.comorbilidad.id}`;
 
     const params = {
@@ -173,7 +142,6 @@ export default class UpdateComorbilidad extends Component {
         "Content-Type": "application/json",
       },
     };
-
     confirmAlert({
       title: "Eliminar Comorbilidad",
       message: "Estas seguro?",
@@ -191,11 +159,8 @@ export default class UpdateComorbilidad extends Component {
                       message: data.error.message,
                     },
                   });
-                } else {
-                  this.props.history.push({
-                    pathname: "/comorbilidad",
-                  });
                 }
+                window.location = "/comorbilidad";
               });
           },
         },
@@ -218,8 +183,8 @@ export default class UpdateComorbilidad extends Component {
       return (
         <Fragment>
           <Alert
-              alertType={this.state.alert.type}
-              alertMessage={this.state.alert.message}
+            alertType={this.state.alert.type}
+            alertMessage={this.state.alert.message}
           />
           <BasicLayout className="updatecomorbilidad">
             <div className="addcomorbilidad__title">
@@ -242,23 +207,11 @@ export default class UpdateComorbilidad extends Component {
                         </Form.Group>
                         <Form.Group>
                           <Form.Control
-                            className={
-                              this.hasError("nameComorbidity")
-                                ? "is-invalid"
-                                : ""
-                            }
                             type="text"
                             name="nameComorbidity"
                             placeholder="Data 2"
-                            onChange={this.handleChange}
                             defaultValue={comorbilidad.nameComorbidity}
                             required
-                            errorDiv={
-                              this.hasError("name_conmorbility")
-                                ? "text-danger"
-                                : "d-none"
-                            }
-                            errorMsg={"Please enter a title"}
                           />
                         </Form.Group>
                         <Form.Group>
@@ -266,7 +219,6 @@ export default class UpdateComorbilidad extends Component {
                             type="text"
                             name="descriptionComorbidity"
                             placeholder="Data 3"
-                            onChange={this.handleChange}
                             defaultValue={comorbilidad.descriptionComorbidity}
                             required
                           />
