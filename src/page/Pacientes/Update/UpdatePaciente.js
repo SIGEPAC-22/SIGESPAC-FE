@@ -185,6 +185,30 @@ export default class UpdatePaciente extends Component {
     } else {
       this.setState({ isLoaded: true });
     }
+    fetch("http://localhost:90/v1/sgp-info-svc/getTypeDocument")
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        //console.log(response)
+        this.setState({ typeDocument: response });
+      });
+    ////////////////////////////////////////////////
+    fetch("http://localhost:90/v1/sgp-info-svc/getDepartment")
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        this.setState({ department: response });
+      });
+    //////////////////////////////////////////////////
+    fetch("http://localhost:90/v1/sgp-info-svc/getSex")
+      .then((response) => {
+        return response.json();
+      })
+      .then((response) => {
+        this.setState({ sex: response });
+      });
   }
 
 
