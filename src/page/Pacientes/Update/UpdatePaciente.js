@@ -211,6 +211,36 @@ export default class UpdatePaciente extends Component {
       });
   }
 
+  handleCheckbox = (event) => {
+    if (!event.target.checked) {
+      this.setState({ event: "" });
+    } else {
+      this.setState({ event: "si" });
+    }
+    console.log(this.state.paciente.pregnant);
+  };
+
+  handleCheckboxForeign = (Foreign) => {
+    if (!Foreign.target.checked) {
+      this.setState({ Foreign: "" });
+    } else {
+      this.setState({ Foreign: "si" });
+    }
+    console.log(this.state.paciente.foreign);
+  };
+
+  handleChangeTypeDocument = (selectedOptionTypeDocument) => {
+    this.setState({
+      selectedOptionTypeDocument,
+    });
+  };
+
+  handleChangeDepartment = (selectedOptionDepartment) => {
+    this.setState({
+      selectedOptionDepartment,
+    });
+  };
+
 
   render() {
     let { paciente, isLoaded, error } = this.state;
@@ -293,19 +323,6 @@ export default class UpdatePaciente extends Component {
                             defaultValue={paciente.lastSecondName}
                           />
                         </Form.Group>
-
-                        <Form.Group>
-                          <label className="labeld">Fecha de nacimiento</label>
-                          <Form.Control
-                            type="date"
-                            name="dateBirth"
-                            placeholder="Fecha de nacimiento"
-                            onChange={this.handleChange}
-                            defaultValue={paciente.dateBirth}
-                            required
-                          />
-                        </Form.Group>
-
                         <Form.Group>
                           <Select
                             className="Selectd"
@@ -317,7 +334,8 @@ export default class UpdatePaciente extends Component {
                               };
                             })}
                             placeholder="Tipo de documento"
-                            value={this.state.selectedOptionTypeDocument}
+                            //value={this.state.selectedOptionTypeDocument}
+                            defaultValue={{label: paciente.documentType}}
                             onChange={this.handleChangeTypeDocument}
                             closeMenuOnSelect={true}
                             required
@@ -385,31 +403,13 @@ export default class UpdatePaciente extends Component {
                               };
                             })}
                             placeholder="Seleccione departamento donde recide"
-                            value={this.state.selectedOptionDepartment}
+                            //value={this.state.selectedOptionDepartment}
+                            defaultValue={{label: paciente.department}}
                             onChange={this.handleChangeDepartment}
                             closeMenuOnSelect={true}
                             required
                           />
                         </Form.Group>
-
-                        <Form.Group>
-                          <Select
-                            className="Selectd"
-                            name="patientSex"
-                            options={this.state.sex.map((elemento) => {
-                              return {
-                                value: `${elemento.id}`,
-                                label: `${elemento.nameSex}`,
-                              };
-                            })}
-                            placeholder="Seleccioné su sexo"
-                            value={this.state.selectedOptionSex}
-                            onChange={this.handleChangeSex}
-                            closeMenuOnSelect={true}
-                            required
-                          />
-                        </Form.Group>
-
                         <Form.Group>
                           <label className="labeld">¿Eres extranjero?</label>
                           <input
@@ -428,7 +428,6 @@ export default class UpdatePaciente extends Component {
                             value={this.state.event}
                           />
                         </Form.Group>
-
                         <div className="form-group column d-flex justify-content-center align-content-center ">
                           <br />
                           <button className="btn btn-primary ms-1">
