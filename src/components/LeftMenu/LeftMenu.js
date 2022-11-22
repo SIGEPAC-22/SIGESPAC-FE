@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faHome,
     faUser,
+    faUsers,
     faClipboardList,
     faPowerOff
 } from '@fortawesome/free-solid-svg-icons'
@@ -25,10 +26,12 @@ export default function LeftMenu(props) {
 
       <Link to='/'>
          <FontAwesomeIcon icon={faHome}/> Inicio</Link>
+
+         
       <Link to='/pacientes'>
       <FontAwesomeIcon icon={faUser}/> Pacientes</Link>
       <Link to='/personal'>
-      <FontAwesomeIcon icon={faUser}/> Personal</Link>
+      <FontAwesomeIcon icon={faUsers}/> Personal</Link>
       <Link to='/comorbilidad'>
       <FontAwesomeIcon icon={ faClipboardList}/> Comorbilidades</Link>
       <Link to='/sintomas'>

@@ -39,6 +39,7 @@ export const URL_UPDATE_PACIENTES = `${URL_PATH_SGP_LOGIC_SVC}/v1/sgp-logic-svc/
 
 export const URL_GET_ALL_PERSONAL = `${URL_PATH_SGP_ACCESS_INFO_SVC}/v1/sgp-access-info-svc/getInfoPersonal`
 export const URL_GET_ONE_PERSONAL = `${URL_PATH_SGP_ACCESS_INFO_SVC}/v1/sgp-access-info-svc/getOneInfoPersonal`
+export const URL_ADD_PERSONAL = `${URL_PATH_SGP_ACCESS_LOGIC_SVC}/v1/sgp-access-logic-svc/createPersonalInfo`
 
 
 //////////////////////////////////////////-DEV-//////////////////////////////////////////

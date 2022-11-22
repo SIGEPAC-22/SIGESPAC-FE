@@ -155,7 +155,7 @@ export default class DetailPersonal extends Component {
                       {getOnePersonal.stateName}
                     </td>
                   </tr>
-                  <Link className="atras btn btn-primary" to={`/pacientes`}> Atrás</Link>
+                  <Link className="atras btn btn-primary" to={`/personal`}> Atrás</Link>
                 </tbody>
               </table>
             </>
