@@ -9,8 +9,15 @@ import {
   URL_UPDATE_PACIENTES ,
   URL_GET_ONE_PACIENTES,
 } from "../../../utils/constant";
-
 import "./UpdatePaciente.scss";
+const options = [
+  {label: "SI", value: "2"},
+  {label: "NO", value: "1"}
+];
+const optionsPregnant = [
+  {label: "SI", value: "1"},
+  {label: "NO", value: "0"}
+];
 export default class UpdatePaciente extends Component {
   constructor(props) {
     super(props);
@@ -241,7 +248,6 @@ export default class UpdatePaciente extends Component {
     });
   };
 
-
   render() {
     let { paciente, isLoaded, error } = this.state;
 
@@ -410,22 +416,23 @@ export default class UpdatePaciente extends Component {
                             required
                           />
                         </Form.Group>
+
                         <Form.Group>
-                          <label className="labeld">¿Eres extranjero?</label>
-                          <input
-                            type="checkbox"
-                            onChange={this.handleCheckboxForeign}
+                          <Select
+                            className="Selectd"
                             name="foreign"
-                            value={this.state.Foreign}
+                            placeholder="¿Eres extranjero?"
+                            options={options}
+                            required
                           />
                         </Form.Group>
                         <Form.Group>
-                          <label className="labeld">¿Estas Embarazada?</label>
-                          <input
-                            type="checkbox"
-                            onChange={this.handleCheckbox}
+                          <Select
+                            className="Selectd"
                             name="pregnant"
-                            value={this.state.event}
+                            placeholder="¿Estas Embarazada?"
+                            options={optionsPregnant}
+                            required
                           />
                         </Form.Group>
                         <div className="form-group column d-flex justify-content-center align-content-center ">
