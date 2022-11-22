@@ -5,7 +5,10 @@ import {
     faHome,
     faUser,
     faUsers,
+    faFileMedical,
     faClipboardList,
+    faHeadSideVirus,
+    faHeadSideCough,
     faPowerOff
 } from '@fortawesome/free-solid-svg-icons'
 import { logoutApi } from '../../api/auth'
@@ -33,9 +36,11 @@ export default function LeftMenu(props) {
       <Link to='/personal'>
       <FontAwesomeIcon icon={faUsers}/> Personal</Link>
       <Link to='/comorbilidad'>
-      <FontAwesomeIcon icon={ faClipboardList}/> Comorbilidades</Link>
+      <FontAwesomeIcon icon={faFileMedical}/> Expediente</Link>
+      <Link to='/comorbilidad'>
+      <FontAwesomeIcon icon={ faHeadSideVirus}/> Comorbilidades</Link>
       <Link to='/sintomas'>
-      <FontAwesomeIcon icon={ faClipboardList}/> Sintomas </Link>
+      <FontAwesomeIcon icon={ faHeadSideCough}/> Sintomas </Link>
       <Link to='  ' onClick ={logout}>
       <FontAwesomeIcon icon={faPowerOff}/> Cerrar Sesión</Link>
 

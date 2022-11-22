@@ -2,12 +2,14 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
 import { Form } from "react-bootstrap";
+import { confirmAlert } from "react-confirm-alert";
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import swal from 'sweetalert';
 import Select from "react-select";
 import {
   URL_UPDATE_PERSONAL ,
   URL_GET_ONE_PERSONAL,
+  URL_DELETE_PERSONAL,
 } from "../../../utils/constant";
 import "./UpdatePersonal.scss";
 
@@ -207,6 +209,46 @@ export default class UpdatePersonal extends Component {
     });
   };
 
+  confirmDelete = () => {
+    const url = `${URL_DELETE_PERSONAL}?id=${this.state.personal.id}`;
+
+    const params = {
+      method: "DELETE",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    };
+    confirmAlert({
+      title: "Eliminar el registro",
+      message: "Estas seguro?",
+      buttons: [
+        {
+          label: "Si",
+          onClick: () => {
+            fetch(url, params)
+              .then((response) => response.json)
+              .then((data) => {
+                if (data.error) {
+                  this.setState({
+                    alert: {
+                      type: "alert-danger",
+                      message: data.error.message,
+                    },
+                  });
+                }
+                window.location = "/personal";
+              });
+          },
+        },
+        {
+          label: "No",
+          onClick: () => {},
+        },
+      ],
+    });
+  };
+
   render() {
     let { personal, isLoaded, error } = this.state;
 
@@ -367,6 +409,18 @@ export default class UpdatePersonal extends Component {
                           >
                             Cancelar
                           </Link>
+
+                          <button className="btn btn-danger ms-1 button2">
+                            {personal.id > 0 && (
+                              <a
+                                href="#!"
+                                className="texta"
+                                onClick={() => this.confirmDelete()}
+                              >
+                                Delete
+                              </a>
+                            )}
+                          </button>
                         </div>
                       </div>
                     </form>

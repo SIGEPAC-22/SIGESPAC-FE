@@ -41,6 +41,7 @@ export const URL_GET_ALL_PERSONAL = `${URL_PATH_SGP_ACCESS_INFO_SVC}/v1/sgp-acce
 export const URL_GET_ONE_PERSONAL = `${URL_PATH_SGP_ACCESS_INFO_SVC}/v1/sgp-access-info-svc/getOneInfoPersonal`
 export const URL_ADD_PERSONAL = `${URL_PATH_SGP_ACCESS_LOGIC_SVC}/v1/sgp-access-logic-svc/createPersonalInfo`
 export const URL_UPDATE_PERSONAL = `${URL_PATH_SGP_ACCESS_LOGIC_SVC}/v1/sgp-access-logic-svc/updatePersonalInfo`
+export const URL_DELETE_PERSONAL = `${URL_PATH_SGP_ACCESS_LOGIC_SVC}/v1/sgp-access-logic-svc/deletePersonalInfo`
 
 
 
