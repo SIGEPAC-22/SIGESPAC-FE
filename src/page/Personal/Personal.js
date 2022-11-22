@@ -119,7 +119,7 @@ export default class Personal extends Component {
                                 <div class={"btn-group"}>
                                   <Link
                                     className={"btn btn-primary btnEditar"}
-                                    to={`/updatepaciente/${gt.id}`}
+                                    to={`/updatepersonal/${gt.id}`}
                                   >
                                     {"Editar"}
                                   </Link>
