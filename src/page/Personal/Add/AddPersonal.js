@@ -2,7 +2,12 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
 import { Form } from "react-bootstrap";
-import { URL_ADD_PERSONAL } from "../../../utils/constant";
+import { 
+  URL_ADD_PERSONAL,
+  URL_GET_ALL_DOCUMENTETYPE,
+  URL_GET_ALL_PERSONALSEX,
+  URL_GET_ALL_TYPEUSER
+ } from "../../../utils/constant";
 import swal from "sweetalert";
 import Select from "react-select";
 import "./AddPersonal.scss";
@@ -42,6 +47,7 @@ export default class AddPersonal extends Component {
     const payload = Object.fromEntries(data.entries());
 
     const url = `${URL_ADD_PERSONAL}`;
+    
 
     const params = {
       method: "POST",
@@ -64,7 +70,7 @@ export default class AddPersonal extends Component {
             this.setState(() => {
               swal({
                 title: "Exito al Guardar",
-                text: "Se agrego correctamente el registro de personal",
+                text: "Se agrego correctamente el registro",
                 icon: "success",
                 timer: "2000",
                 buttons: false,
@@ -76,7 +82,7 @@ export default class AddPersonal extends Component {
             this.setState(() => {
               swal({
                 title: "Error al Guardar",
-                text: "Error el registro no se realizo con exito, intentelo, nuevamente",
+                text: "Error el registro no se realizo con exito, intentelo nuevamente",
                 icon: "error",
                 timer: "2000",
                 buttons: false,
@@ -121,7 +127,8 @@ export default class AddPersonal extends Component {
       },
       isLoaded: true,
     });
-    fetch("http://localhost:93/v1/sgp-access-info-svc/getDocumentType")
+    
+    fetch(URL_GET_ALL_DOCUMENTETYPE)
       .then((response) => {
         return response.json();
       })
@@ -130,7 +137,7 @@ export default class AddPersonal extends Component {
         this.setState({ typeDocument: response });
       });
     ////////////////////////////////////////////////
-    fetch("http://localhost:93/v1/sgp-access-info-svc/getPersonalSex")
+    fetch(URL_GET_ALL_PERSONALSEX)
       .then((response) => {
         return response.json();
       })
@@ -138,7 +145,7 @@ export default class AddPersonal extends Component {
         this.setState({ sex: response });
       });
       ////////////////////////////////////////////////
-    fetch("http://localhost:93/v1/sgp-access-info-svc/getTypeUser")
+    fetch(URL_GET_ALL_TYPEUSER)
     .then((response) => {
       return response.json();
     })

@@ -8,6 +8,9 @@ import Select from "react-select";
 import {
   URL_UPDATE_PACIENTES ,
   URL_GET_ONE_PACIENTES,
+  URL_GET_ALL_PACIENTE_DOCUMENTETYPE,
+  URL_GET_ALL_PACIENTE_DEPARTMENT,
+  URL_GET_ALL_PACIENTE_SEX
 } from "../../../utils/constant";
 import "./UpdatePaciente.scss";
 const options = [
@@ -101,10 +104,11 @@ export default class UpdatePaciente extends Component {
             alert: { type: "alert-danger", message: data.error.message },
           });
         } else {
+          if (data.responseCode === 200) {
           this.setState(()=>{
             swal({
               title: "Exito al Actualizar",
-              text: "Se actualizó correctamente el registro de comorbilidad",
+              text: "Se actualizó correctamente el registro",
               icon:"success",
               timer: "2000",
               buttons: false,
@@ -112,7 +116,35 @@ export default class UpdatePaciente extends Component {
             window.location="/pacientes"
           })
           });
+        }else {
+          this.setState(() => {
+            swal({
+              title: "Error al Guardar",
+              text: "Error el registro no se realizo con exito, intentelo nuevamente",
+              icon: "error",
+              timer: "2000",
+              buttons: false,
+            }).then(function () {
+              window.location = "/pacientes";
+            });
+          });
         }
+        }
+      })
+      .catch((error) => {
+        this.setState(() => {
+          swal({
+            title: "Error",
+            text:
+              "No hubo comunicacion exitosa con el servidor, intentelo nuevamente " +
+              "Error:" +
+              error,
+            icon: "error",
+            button: "OK",
+          }).then(function () {
+            window.location = "/pacientes";
+          });
+        });
       });
   };
 
@@ -192,7 +224,7 @@ export default class UpdatePaciente extends Component {
     } else {
       this.setState({ isLoaded: true });
     }
-    fetch("http://localhost:90/v1/sgp-info-svc/getTypeDocument")
+    fetch(URL_GET_ALL_PACIENTE_DOCUMENTETYPE)
       .then((response) => {
         return response.json();
       })
@@ -201,7 +233,7 @@ export default class UpdatePaciente extends Component {
         this.setState({ typeDocument: response });
       });
     ////////////////////////////////////////////////
-    fetch("http://localhost:90/v1/sgp-info-svc/getDepartment")
+    fetch(URL_GET_ALL_PACIENTE_DEPARTMENT)
       .then((response) => {
         return response.json();
       })
@@ -209,7 +241,7 @@ export default class UpdatePaciente extends Component {
         this.setState({ department: response });
       });
     //////////////////////////////////////////////////
-    fetch("http://localhost:90/v1/sgp-info-svc/getSex")
+    fetch(URL_GET_ALL_PACIENTE_SEX)
       .then((response) => {
         return response.json();
       })

@@ -80,10 +80,11 @@ export default class UpdateSintomas extends Component {
             alert: { type: "alert-danger", message: data.error.message },
           });
         } else {
+          if (data.responseCode === 200) {
           this.setState(()=>{
             swal({
               title: "Exito al Actualizar",
-              text: "Se actualizó correctamente el registro de sintoma",
+              text: "Se actualizó correctamente el registro",
               icon:"success",
               timer: "2000",
               buttons: false,
@@ -91,8 +92,35 @@ export default class UpdateSintomas extends Component {
             window.location="/sintomas"
           })
           });
+        }else {
+          this.setState(() => {
+            swal({
+              title: "Error al Guardar",
+              text: "Error el registro no se realizo con exito, intentelo nuevamente",
+              icon: "error",
+              timer: "2000",
+              buttons: false,
+            }).then(function () {
+              window.location = "/sintomas";
+            });
+          });
         }
-      });
+        }
+      }).catch((error) => {
+        this.setState(() => {
+          swal({
+            title: "Error",
+            text:
+              "No hubo comunicacion exitosa con el servidor, intentelo nuevamente " +
+              "Error:" +
+              error,
+            icon: "error",
+            button: "OK",
+          }).then(function () {
+            window.location = "/sintomas";
+          });
+        });
+      })
   };
 
   //si no se usa borrar
@@ -175,8 +203,8 @@ export default class UpdateSintomas extends Component {
     };
 
     confirmAlert({
-      title: "Eliminar sintoma",
-      message: "Estas seguro?",
+      title: "Eliminar este registro",
+      message: "¿Estas seguro?",
       buttons: [
         {
           label: "Si",
@@ -284,7 +312,7 @@ export default class UpdateSintomas extends Component {
                             Cancelar
                           </Link>
 
-                          <button className="btn btn-danger ms-1 button2">
+                          <Link className="btn btn-danger ms-1 button2">
                             {sintoma.id > 0 && (
                               <a
                                 href="#!"
@@ -294,7 +322,7 @@ export default class UpdateSintomas extends Component {
                                 Delete
                               </a>
                             )}
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     </form>

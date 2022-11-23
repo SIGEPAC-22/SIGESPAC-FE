@@ -2,7 +2,12 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
 import { Form } from "react-bootstrap";
-import { URL_ADD_PACIENTES } from "../../../utils/constant";
+import { 
+  URL_ADD_PACIENTES,
+  URL_GET_ALL_PACIENTE_DOCUMENTETYPE,
+  URL_GET_ALL_PACIENTE_DEPARTMENT,
+  URL_GET_ALL_PACIENTE_SEX
+ } from "../../../utils/constant";
 import swal from "sweetalert";
 import Select from "react-select";
 import "./AddPacientes.scss";
@@ -78,7 +83,7 @@ export default class AddPacientes extends Component {
             this.setState(() => {
               swal({
                 title: "Exito al Guardar",
-                text: "Se agrego correctamente el registro de pacientes",
+                text: "Se agrego correctamente el registro",
                 icon: "success",
                 timer: "2000",
                 buttons: false,
@@ -90,7 +95,7 @@ export default class AddPacientes extends Component {
             this.setState(() => {
               swal({
                 title: "Error al Guardar",
-                text: "Error el registro no se realizo con exito, intentelo, nuevamente",
+                text: "Error el registro no se realizo con exito, intentelo nuevamente",
                 icon: "error",
                 timer: "2000",
                 buttons: false,
@@ -139,7 +144,7 @@ export default class AddPacientes extends Component {
       },
       isLoaded: true,
     });
-    fetch("http://localhost:90/v1/sgp-info-svc/getTypeDocument")
+    fetch(URL_GET_ALL_PACIENTE_DOCUMENTETYPE)
       .then((response) => {
         return response.json();
       })
@@ -148,7 +153,7 @@ export default class AddPacientes extends Component {
         this.setState({ typeDocument: response });
       });
     ////////////////////////////////////////////////
-    fetch("http://localhost:90/v1/sgp-info-svc/getDepartment")
+    fetch(URL_GET_ALL_PACIENTE_DEPARTMENT)
       .then((response) => {
         return response.json();
       })
@@ -156,7 +161,7 @@ export default class AddPacientes extends Component {
         this.setState({ department: response });
       });
     //////////////////////////////////////////////////
-    fetch("http://localhost:90/v1/sgp-info-svc/getSex")
+    fetch(URL_GET_ALL_PACIENTE_SEX)
       .then((response) => {
         return response.json();
       })

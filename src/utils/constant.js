@@ -36,13 +36,18 @@ export const URL_GET_ALL_PACIENTES = `${URL_PATH_SGP_INFO_SVC}/v1/sgp-info-svc/g
 export const URL_GET_ONE_PACIENTES = `${URL_PATH_SGP_INFO_SVC}/v1/sgp-info-svc/getOneInfoPatient`
 export const URL_ADD_PACIENTES = `${URL_PATH_SGP_LOGIC_SVC}/v1/sgp-logic-svc/createInfoPatient`
 export const URL_UPDATE_PACIENTES = `${URL_PATH_SGP_LOGIC_SVC}/v1/sgp-logic-svc/updateInfoPatient`
+export const URL_GET_ALL_PACIENTE_DOCUMENTETYPE = `${URL_PATH_SGP_INFO_SVC}/v1/sgp-info-svc/getTypeDocument`
+export const URL_GET_ALL_PACIENTE_DEPARTMENT = `${URL_PATH_SGP_INFO_SVC}/v1/sgp-info-svc/getDepartment`
+export const URL_GET_ALL_PACIENTE_SEX = `${URL_PATH_SGP_INFO_SVC}/v1/sgp-info-svc/getSex`
 
 export const URL_GET_ALL_PERSONAL = `${URL_PATH_SGP_ACCESS_INFO_SVC}/v1/sgp-access-info-svc/getInfoPersonal`
 export const URL_GET_ONE_PERSONAL = `${URL_PATH_SGP_ACCESS_INFO_SVC}/v1/sgp-access-info-svc/getOneInfoPersonal`
 export const URL_ADD_PERSONAL = `${URL_PATH_SGP_ACCESS_LOGIC_SVC}/v1/sgp-access-logic-svc/createPersonalInfo`
 export const URL_UPDATE_PERSONAL = `${URL_PATH_SGP_ACCESS_LOGIC_SVC}/v1/sgp-access-logic-svc/updatePersonalInfo`
 export const URL_DELETE_PERSONAL = `${URL_PATH_SGP_ACCESS_LOGIC_SVC}/v1/sgp-access-logic-svc/deletePersonalInfo`
-
+export const URL_GET_ALL_DOCUMENTETYPE = `${URL_PATH_SGP_ACCESS_INFO_SVC}/v1/sgp-access-info-svc/getDocumentType`
+export const URL_GET_ALL_PERSONALSEX = `${URL_PATH_SGP_ACCESS_INFO_SVC}/v1/sgp-access-info-svc/getPersonalSex`
+export const URL_GET_ALL_TYPEUSER = `${URL_PATH_SGP_ACCESS_INFO_SVC}/v1/sgp-access-info-svc/getTypeUser`
 
 
 //////////////////////////////////////////-DEV-//////////////////////////////////////////

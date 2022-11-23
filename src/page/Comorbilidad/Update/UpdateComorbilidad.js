@@ -67,10 +67,11 @@ export default class UpdateComorbilidad extends Component {
             alert: { type: "alert-danger", message: data.error.message },
           });
         } else {
+          if (data.responseCode === 200) {
           this.setState(() => {
             swal({
               title: "Exito al Actualizar",
-              text: "Se actualizó correctamente el registro de comorbilidad",
+              text: "Se actualizó correctamente el registro",
               icon: "success",
               timer: "2000",
               buttons: false,
@@ -78,8 +79,35 @@ export default class UpdateComorbilidad extends Component {
               window.location = "/comorbilidad";
             });
           });
+        }else {
+          this.setState(() => {
+            swal({
+              title: "Error al Guardar",
+              text: "Error el registro no se realizo con exito, intentelo nuevamente",
+              icon: "error",
+              timer: "2000",
+              buttons: false,
+            }).then(function () {
+              window.location = "/comorbilidad";
+            });
+          });
         }
-      });
+        }
+      }).catch((error) => {
+        this.setState(() => {
+          swal({
+            title: "Error",
+            text:
+              "No hubo comunicacion exitosa con el servidor, intentelo nuevamente " +
+              "Error:" +
+              error,
+            icon: "error",
+            button: "OK",
+          }).then(function () {
+            window.location = "/comorbilidad";
+          });
+        });
+      })
   };
 
   componentDidMount() {
@@ -143,8 +171,8 @@ export default class UpdateComorbilidad extends Component {
       },
     };
     confirmAlert({
-      title: "Eliminar Comorbilidad",
-      message: "Estas seguro?",
+      title: "Eliminar este registro",
+      message: "¿Estas seguro?",
       buttons: [
         {
           label: "Si",
@@ -236,7 +264,7 @@ export default class UpdateComorbilidad extends Component {
                             Cancelar
                           </Link>
 
-                          <button className="btn btn-danger ms-1 button2">
+                          <Link className="btn btn-danger ms-1 button2">
                             {comorbilidad.id > 0 && (
                               <a
                                 href="#!"
@@ -246,7 +274,7 @@ export default class UpdateComorbilidad extends Component {
                                 Delete
                               </a>
                             )}
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     </form>

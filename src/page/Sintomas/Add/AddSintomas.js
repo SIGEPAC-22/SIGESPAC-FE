@@ -49,10 +49,11 @@ export default class AddSintomas extends Component {
           });
         } else {
           this.cancel();
+          if (data.responseCode === 200) {
           this.setState(()=>{
             swal({
               title: "Exito al Guardar",
-              text: "Se agrego correctamente el registro de Sintoma",
+              text: "Se agrego correctamente el registro",
               icon:"success",
               timer: "2000",
               buttons: false,
@@ -60,8 +61,35 @@ export default class AddSintomas extends Component {
             window.location="/sintomas"
           })
           });
+        }else {
+          this.setState(() => {
+            swal({
+              title: "Error al Guardar",
+              text: "Error el registro no se realizo con exito, intentelo nuevamente",
+              icon: "error",
+              timer: "2000",
+              buttons: false,
+            }).then(function () {
+              window.location = "/sintomas";
+            });
+          });
         }
-      });
+        }
+      }).catch((error) => {
+        this.setState(() => {
+          swal({
+            title: "Error",
+            text:
+              "No hubo comunicacion exitosa con el servidor, intentelo nuevamente " +
+              "Error:" +
+              error,
+            icon: "error",
+            button: "OK",
+          }).then(function () {
+            window.location = "/sintomas";
+          });
+        });
+      })
   };
 
   componentDidMount() {

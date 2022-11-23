@@ -10,6 +10,8 @@ import {
   URL_UPDATE_PERSONAL ,
   URL_GET_ONE_PERSONAL,
   URL_DELETE_PERSONAL,
+  URL_GET_ALL_DOCUMENTETYPE,
+  URL_GET_ALL_TYPEUSER,
 } from "../../../utils/constant";
 import "./UpdatePersonal.scss";
 
@@ -89,6 +91,7 @@ export default class UpdatePersonal extends Component {
             alert: { type: "alert-danger", message: data.error.message },
           });
         } else {
+          if (data.responseCode === 200) {
           this.setState(()=>{
             swal({
               title: "Exito al Actualizar",
@@ -100,7 +103,35 @@ export default class UpdatePersonal extends Component {
             window.location="/personal"
           })
           });
+        }else {
+          this.setState(() => {
+            swal({
+              title: "Error al Guardar",
+              text: "Error el registro no se realizo con exito, intentelo nuevamente",
+              icon: "error",
+              timer: "2000",
+              buttons: false,
+            }).then(function () {
+              window.location = "/personal";
+            });
+          });
         }
+        }
+      })
+      .catch((error) => {
+        this.setState(() => {
+          swal({
+            title: "Error",
+            text:
+              "No hubo comunicacion exitosa con el servidor, intentelo nuevamente " +
+              "Error:" +
+              error,
+            icon: "error",
+            button: "OK",
+          }).then(function () {
+            window.location = "/personal";
+          });
+        });
       });
   };
 
@@ -176,7 +207,7 @@ export default class UpdatePersonal extends Component {
     } else {
       this.setState({ isLoaded: true });
     }
-    fetch("http://localhost:93/v1/sgp-access-info-svc/getDocumentType")
+    fetch(URL_GET_ALL_DOCUMENTETYPE)
       .then((response) => {
         return response.json();
       })
@@ -185,7 +216,7 @@ export default class UpdatePersonal extends Component {
         this.setState({ typeDocument: response });
       });
     ////////////////////////////////////////////////
-    fetch("http://localhost:93/v1/sgp-access-info-svc/getTypeUser")
+    fetch(URL_GET_ALL_TYPEUSER)
       .then((response) => {
         return response.json();
       })
@@ -390,7 +421,6 @@ export default class UpdatePersonal extends Component {
                               };
                             })}
                             placeholder="Seleccione departamento donde recide"
-                            //value={this.state.selectedOptionDepartment}
                             defaultValue={{label: personal.typeUser}}
                             onChange={this.handleChangetypeUser}
                             closeMenuOnSelect={true}
@@ -410,7 +440,7 @@ export default class UpdatePersonal extends Component {
                             Cancelar
                           </Link>
 
-                          <button className="btn btn-danger ms-1 button2">
+                          <Link className="btn btn-danger ms-1 button2">
                             {personal.id > 0 && (
                               <a
                                 href="#!"
@@ -420,7 +450,7 @@ export default class UpdatePersonal extends Component {
                                 Delete
                               </a>
                             )}
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     </form>
