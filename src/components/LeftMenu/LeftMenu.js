@@ -6,7 +6,6 @@ import {
     faUser,
     faUsers,
     faFileMedical,
-    faClipboardList,
     faHeadSideVirus,
     faHeadSideCough,
     faPowerOff
