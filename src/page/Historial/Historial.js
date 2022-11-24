@@ -1,19 +1,19 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../layout/BasicLayout";
-import { URL_GET_ALL_PERSONAL } from "../../utils/constant";
+import { URL_GET_ALL_HISTORY } from "../../utils/constant";
 
-import "./Expediente.scss";
+import "./Historial.scss";
 
-export default class Expediente extends Component {
+export default class Historial extends Component {
   state = {
-    getExpediente: [],
+    gethistorial: [],
     isLoaded: false,
     error: null,
   };
 
   componentDidMount() {
-    const url = `${URL_GET_ALL_PERSONAL}`;
+    const url = `${URL_GET_ALL_HISTORY}`;
     const params = {
       method: "GET",
       headers: {
@@ -31,7 +31,7 @@ export default class Expediente extends Component {
           }
           console.log(result)
           this.setState({
-            getPersonal: result,
+            gethistorial: result,
             isLoaded: true,
           });
         },
@@ -45,7 +45,7 @@ export default class Expediente extends Component {
   }
 
   render() {
-    const { getPersonal, isLoaded, error } = this.state;
+    const { gethistorial, isLoaded, error } = this.state;
 
     if (error) {
       return (
@@ -62,18 +62,13 @@ export default class Expediente extends Component {
     } else {
       return (
         <Fragment>
-          <BasicLayout className="expediente">
-            <div className="expediente__title">
-              <h2>Expediente</h2>
+          <BasicLayout className="historial">
+            <div className="historial__title">
+              <h2>Historial de pacientes</h2>
             </div>
             <br />
             <div class={"container"}>
               <div class={"row"}>
-                <div class={"col-lg-12"}>
-                  <Link className={"btn btn-success"} to={`/addpersonal`}>
-                    {"Agregar"}
-                  </Link>
-                </div>
               </div>
             </div>
             <br />
@@ -88,44 +83,38 @@ export default class Expediente extends Component {
                     >
                       <thead class={"text-center"}>
                         <tr>
-                          <th className="text-light">Nombres</th>
-                          <th className="text-light">Apellidos</th>
-                          <th className="text-light">Fecha de Nacimiento</th>
-                          <th className="text-light">Nº Documento</th>
-                          <th className="text-light">Usuario</th>
+                          <th className="text-light">Nombre</th>
+                          <th className="text-light">Apellido</th>
+                          <th className="text-light">Fecha de Ingreso</th>
+                          <th className="text-light">Fecha de alta</th>
+                          <th className="text-light">Fecha de baja</th>
                           <th className="text-light">Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {getPersonal.map((gt) => (
+                        {gethistorial.map((gt) => (
                           <tr>
-                            <td className="text-light" key={gt.id}>
-                              {gt.firstName} {gt.secondName}
+                            <td className="text-light" key={gt.idPatient}>
+                              {gt.firstName}
                             </td>
-                            <td className="text-light" key={gt.id}>
-                              {gt.lastName} {gt.secondLastName}
+                            <td className="text-light" key={gt.idPatient}>
+                              {gt.lastName} 
                             </td>
-                            <td className="text-light" key={gt.id}>
-                              {gt.dateOfBirth}
+                            <td className="text-light" key={gt.idPatient}>
+                              {gt.admissionDate}
                             </td>
-                            <td className="text-light" key={gt.id}>
-                              {gt.documentNumber}
+                            <td className="text-light" key={gt.idPatient}>
+                            {gt.highDate}
                             </td>
-                            <td className="text-light" key={gt.id}>
-                              {gt.user}
+                            <td className="text-light" key={gt.idPatient}>
+                            {gt.lowDate}
                             </td>
                             <td>
                               <div class={"text-center"}>
                                 <div class={"btn-group"}>
                                   <Link
-                                    className={"btn btn-primary btnEditar"}
-                                    to={`/updatepersonal/${gt.id}`}
-                                  >
-                                    {"Editar"}
-                                  </Link>
-                                  <Link
                                     className={"btn btn-secondary btnDetalle"}
-                                    to={`/detailpersonal/${gt.id}`}
+                                    to={`/detailhistorial/${gt.idPatient}`}
                                   >
                                     {"Detalle"}
                                   </Link>

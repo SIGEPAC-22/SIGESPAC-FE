@@ -6,6 +6,7 @@ import {
     faUser,
     faUsers,
     faFileMedical,
+    faFileWaveform,
     faHeadSideVirus,
     faHeadSideCough,
     faPowerOff
@@ -34,8 +35,10 @@ export default function LeftMenu(props) {
       <FontAwesomeIcon icon={faUser}/> Pacientes</Link>
       <Link to='/personal'>
       <FontAwesomeIcon icon={faUsers}/> Personal</Link>
-      <Link to='/comorbilidad'>
+      <Link to='/expediente'>
       <FontAwesomeIcon icon={faFileMedical}/> Expediente</Link>
+      <Link to='/historial'>
+      <FontAwesomeIcon icon={faFileWaveform}/> Historial</Link>
       <Link to='/comorbilidad'>
       <FontAwesomeIcon icon={ faHeadSideVirus}/> Comorbilidades</Link>
       <Link to='/sintomas'>

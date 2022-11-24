@@ -17,6 +17,8 @@ export const URL_PATH_SGP_ACCESS_LOGIC_SVC = "http://localhost:91"
 ///////////SGP-ACCESS-LOGIC-SVC///////////
 export const URL_PATH_SGP_ACCESS_INFO_SVC = "http://localhost:93"
 
+export const URL_PATH_SGP_DATA_HISTORY_SVC = "http://localhost:94"
+
 
 export const URL_GET_DATA_AUTH_LOGIN = `${URL_PATH_SGP_ACCESS_LOGIC_SVC}/v1/sgp-access-logic-svc/getDataAuthLogin`
 export const URL_GET_ALL_COMORBILIDAD = `${URL_PATH_SGP_INFO_SVC}/v1/sgp-info-svc/getComorbidity`
@@ -49,6 +51,9 @@ export const URL_GET_ALL_DOCUMENTETYPE = `${URL_PATH_SGP_ACCESS_INFO_SVC}/v1/sgp
 export const URL_GET_ALL_PERSONALSEX = `${URL_PATH_SGP_ACCESS_INFO_SVC}/v1/sgp-access-info-svc/getPersonalSex`
 export const URL_GET_ALL_TYPEUSER = `${URL_PATH_SGP_ACCESS_INFO_SVC}/v1/sgp-access-info-svc/getTypeUser`
 
+export const URL_GET_ALL_HISTORY = `${URL_PATH_SGP_DATA_HISTORY_SVC}/v1/sgp-data-history-svc/getHistorical`
+
+export const URL_GET_ONE_HISTORY = `${URL_PATH_SGP_DATA_HISTORY_SVC}/v1/sgp-data-history-svc/getOneHistorical`
 
 //////////////////////////////////////////-DEV-//////////////////////////////////////////
 /*
