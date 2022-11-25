@@ -69,7 +69,7 @@ export default class DetailHistorial extends Component {
             </div>
             <>
               <div className="float-start text-light">
-                <h4>ID : {getOneHistorial.idPatient}</h4>
+                <h4>ID Paciente: {getOneHistorial.idPatient}</h4>
               </div>
               <br></br>
               <hr></hr>
@@ -94,7 +94,7 @@ export default class DetailHistorial extends Component {
                   </tr>
                   <tr>
                     <td className="fw-bold text-light fs-5">
-                    Fecha de Ingreso:
+                      Fecha de admision:
                     </td>
                     <td className="text-light fs-5">
                       {getOneHistorial.admissionDate}
@@ -102,7 +102,7 @@ export default class DetailHistorial extends Component {
                   </tr>
                   <tr>
                     <td className="fw-bold text-light fs-5">
-                    Fecha de alta:
+                      Fecha de alta:
                     </td>
                     <td className="text-light fs-5">
                       {getOneHistorial.highDate}
@@ -110,13 +110,13 @@ export default class DetailHistorial extends Component {
                   </tr>
                   <tr>
                     <td className="fw-bold text-light fs-5">
-                    Fecha de baja:
+                      Fecha de baja:
                     </td>
                     <td className="text-light fs-5">
                       {getOneHistorial.lowDate}
                     </td>
                   </tr>
-
+                
                   <Link className="atras btn btn-primary" to={`/historial`}> Atrás</Link>
                 </tbody>
               </table>
