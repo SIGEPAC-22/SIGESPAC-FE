@@ -164,3 +164,6 @@ export const URL_ADD_PACIENTES = `${URL_PATH_SGP_LOGIC_SVC}/v1/sgp-logic-svc/cre
 export const URL_UPDATE_PACIENTES = `${URL_PATH_SGP_LOGIC_SVC}/v1/sgp-logic-svc/updateInfoPatient`
 */
 //////////////////////////////////////////-PRD-//////////////////////////////////////////
+
+
+/////////////////////////////
