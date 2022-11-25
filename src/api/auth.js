@@ -1,7 +1,7 @@
-import{STATUS, URL_GET_DATA_AUTH_LOGIN } from "../utils/constant";
+import{STATUS} from "../utils/constant";
 
 export function singInApi(user){
-    const url = `${URL_GET_DATA_AUTH_LOGIN}`;
+    const url = `${process.env.REACT_APP_URL_GET_DATA_AUTH_LOGIN}`;
 
     const data ={
         ...user,

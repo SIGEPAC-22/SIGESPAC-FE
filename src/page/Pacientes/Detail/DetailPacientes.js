@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
-import { URL_GET_ONE_PACIENTES } from "../../../utils/constant";
 import "./DetailPacientes.scss";
 
 export default class DetailPacientes extends Component {
@@ -18,7 +17,7 @@ export default class DetailPacientes extends Component {
     var id = 0;
     id = urlNavOrigin
 
-    const url = `${URL_GET_ONE_PACIENTES}?id=${id}`;
+    const url = `${process.env.REACT_APP_URL_GET_ONE_PATIENT}?id=${id}`;
 
     const params = {
       method: "GET",

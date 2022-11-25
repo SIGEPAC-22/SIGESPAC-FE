@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../layout/BasicLayout";
-import { URL_GET_ALL_PACIENTES } from "../../utils/constant";
 
 import "./Pacientes.scss";
 
@@ -13,7 +12,7 @@ export default class Pacientes extends Component {
   };
 
   componentDidMount() {
-    const url = `${URL_GET_ALL_PACIENTES}`;
+    const url = `${process.env.REACT_APP_URL_GET_ALL_PATIENT}`;
     const params = {
       method: "GET",
       headers: {

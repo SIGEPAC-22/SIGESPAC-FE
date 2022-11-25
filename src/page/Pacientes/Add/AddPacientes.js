@@ -2,12 +2,6 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
 import { Form } from "react-bootstrap";
-import { 
-  URL_ADD_PACIENTES,
-  URL_GET_ALL_PACIENTE_DOCUMENTETYPE,
-  URL_GET_ALL_PACIENTE_DEPARTMENT,
-  URL_GET_ALL_PACIENTE_SEX
- } from "../../../utils/constant";
 import swal from "sweetalert";
 import Select from "react-select";
 import "./AddPacientes.scss";
@@ -60,7 +54,7 @@ export default class AddPacientes extends Component {
     const data = new FormData(evt.target);
     const payload = Object.fromEntries(data.entries());
 
-    const url = `${URL_ADD_PACIENTES}`;
+    const url = `${process.env.REACT_APP_URL_ADD_PATIENT}`;
 
     const params = {
       method: "POST",
@@ -144,7 +138,7 @@ export default class AddPacientes extends Component {
       },
       isLoaded: true,
     });
-    fetch(URL_GET_ALL_PACIENTE_DOCUMENTETYPE)
+    fetch(process.env.REACT_APP_URL_GET_ALL_PATIENT_DOCUMENT_TYPE)
       .then((response) => {
         return response.json();
       })
@@ -153,7 +147,7 @@ export default class AddPacientes extends Component {
         this.setState({ typeDocument: response });
       });
     ////////////////////////////////////////////////
-    fetch(URL_GET_ALL_PACIENTE_DEPARTMENT)
+    fetch(process.env.REACT_APP_URL_GET_ALL_PATIENT_DEPARTMENT)
       .then((response) => {
         return response.json();
       })
@@ -161,7 +155,7 @@ export default class AddPacientes extends Component {
         this.setState({ department: response });
       });
     //////////////////////////////////////////////////
-    fetch(URL_GET_ALL_PACIENTE_SEX)
+    fetch(process.env.REACT_APP_URL_GET_ALL_PATIENT_SEX)
       .then((response) => {
         return response.json();
       })

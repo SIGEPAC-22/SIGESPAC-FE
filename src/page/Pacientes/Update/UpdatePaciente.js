@@ -5,22 +5,8 @@ import { Form } from "react-bootstrap";
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import swal from 'sweetalert';
 import Select from "react-select";
-import {
-  URL_UPDATE_PACIENTES ,
-  URL_GET_ONE_PACIENTES,
-  URL_GET_ALL_PACIENTE_DOCUMENTETYPE,
-  URL_GET_ALL_PACIENTE_DEPARTMENT,
-  URL_GET_ALL_PACIENTE_SEX
-} from "../../../utils/constant";
 import "./UpdatePaciente.scss";
-const options = [
-  {label: "SI", value: "2"},
-  {label: "NO", value: "1"}
-];
-const optionsPregnant = [
-  {label: "SI", value: "1"},
-  {label: "NO", value: "0"}
-];
+
 export default class UpdatePaciente extends Component {
   constructor(props) {
     super(props);
@@ -40,8 +26,6 @@ export default class UpdatePaciente extends Component {
         responsibleFamilyPhoneNumber: "",
         department: "",
         patientSex: "",
-        pregnant: "",
-        foreign: "",
       },
       isLoaded: false,
       typeDocument: [],
@@ -85,7 +69,7 @@ export default class UpdatePaciente extends Component {
     var id = 0;
     id = urlNavOrigin;
 
-    const url = `${URL_UPDATE_PACIENTES}?id=${id}`;
+    const url = `${process.env.REACT_APP_URL_UPDATE_PATIENT}?id=${id}`;
 
     const params = {
       method: "PUT",
@@ -171,7 +155,7 @@ export default class UpdatePaciente extends Component {
     var id = 0;
     id = urlNavOrigin;
 
-    const url = `${URL_GET_ONE_PACIENTES}?id=${id}`;
+    const url = `${process.env.REACT_APP_URL_GET_ONE_PATIENT}?id=${id}`;
 
     const params = {
       method: "GET",
@@ -224,7 +208,7 @@ export default class UpdatePaciente extends Component {
     } else {
       this.setState({ isLoaded: true });
     }
-    fetch(URL_GET_ALL_PACIENTE_DOCUMENTETYPE)
+    fetch(process.env.REACT_APP_URL_GET_ALL_PATIENT_DOCUMENT_TYPE)
       .then((response) => {
         return response.json();
       })
@@ -233,7 +217,7 @@ export default class UpdatePaciente extends Component {
         this.setState({ typeDocument: response });
       });
     ////////////////////////////////////////////////
-    fetch(URL_GET_ALL_PACIENTE_DEPARTMENT)
+    fetch(process.env.REACT_APP_URL_GET_ALL_PATIENT_DEPARTMENT)
       .then((response) => {
         return response.json();
       })
@@ -241,7 +225,7 @@ export default class UpdatePaciente extends Component {
         this.setState({ department: response });
       });
     //////////////////////////////////////////////////
-    fetch(URL_GET_ALL_PACIENTE_SEX)
+    fetch(process.env.REACT_APP_URL_GET_ALL_PATIENT_SEX)
       .then((response) => {
         return response.json();
       })
@@ -249,24 +233,6 @@ export default class UpdatePaciente extends Component {
         this.setState({ sex: response });
       });
   }
-
-  handleCheckbox = (event) => {
-    if (!event.target.checked) {
-      this.setState({ event: "" });
-    } else {
-      this.setState({ event: "si" });
-    }
-    console.log(this.state.paciente.pregnant);
-  };
-
-  handleCheckboxForeign = (Foreign) => {
-    if (!Foreign.target.checked) {
-      this.setState({ Foreign: "" });
-    } else {
-      this.setState({ Foreign: "si" });
-    }
-    console.log(this.state.paciente.foreign);
-  };
 
   handleChangeTypeDocument = (selectedOptionTypeDocument) => {
     this.setState({
@@ -449,24 +415,6 @@ export default class UpdatePaciente extends Component {
                           />
                         </Form.Group>
 
-                        <Form.Group>
-                          <Select
-                            className="Selectd"
-                            name="foreign"
-                            placeholder="¿Eres extranjero?"
-                            options={options}
-                            required
-                          />
-                        </Form.Group>
-                        <Form.Group>
-                          <Select
-                            className="Selectd"
-                            name="pregnant"
-                            placeholder="¿Estas Embarazada?"
-                            options={optionsPregnant}
-                            required
-                          />
-                        </Form.Group>
                         <div className="form-group column d-flex justify-content-center align-content-center ">
                           <br />
                           <button className="btn btn-primary ms-1">
