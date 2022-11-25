@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../layout/BasicLayout";
-import { URL_GET_ALL_PERSONAL } from "../../utils/constant";
 
 import "./Expediente.scss";
 
@@ -13,7 +12,7 @@ export default class Expediente extends Component {
   };
 
   componentDidMount() {
-    const url = `${URL_GET_ALL_PERSONAL}`;
+    const url = `${process.env.REACT_APP_URL_GET_ALL_PERSONAL}`;
     const params = {
       method: "GET",
       headers: {

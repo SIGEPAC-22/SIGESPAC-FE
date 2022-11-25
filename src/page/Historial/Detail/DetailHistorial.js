@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
-import { URL_GET_ONE_HISTORY } from "../../../utils/constant";
 import "./DetailHistorial.scss";
 
 export default class DetailHistorial extends Component {
@@ -18,7 +17,7 @@ export default class DetailHistorial extends Component {
     var id = 0;
     id = urlNavOrigin
 
-    const url = `${URL_GET_ONE_HISTORY}?id=${id}`;
+    const url = `${process.env.REACT_APP_URL_GET_ONE_HISTORY}?id=${id}`;
 
     const params = {
       method: "GET",
@@ -70,8 +69,11 @@ export default class DetailHistorial extends Component {
             <>
               <div className="float-start text-light">
                 <h4>ID Paciente: {getOneHistorial.idPatient}</h4>
+                <h4>ID Expediente: {getOneHistorial.idPatientFile}</h4>
               </div>
               <br></br>
+              <br/>
+              <br/>
               <hr></hr>
               <table className="table table-compact table-striped">
                 <thead></thead>
