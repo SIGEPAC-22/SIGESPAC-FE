@@ -6,11 +6,6 @@ import { confirmAlert } from "react-confirm-alert";
 import Alert from "../../../utils/Alert";
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import swal from 'sweetalert';
-import {
-  URL_UPDATE_SINTOMAS,
-  URL_GET_ONE_SINTOMAS,
-  URL_DELETE_SINTOMAS,
-} from "../../../utils/constant";
 
 import "./UpdateSintomas.scss";
 export default class UpdateSintomas extends Component {
@@ -61,7 +56,7 @@ export default class UpdateSintomas extends Component {
     var id = 0;
     id = urlNavOrigin;
 
-    const url = `${URL_UPDATE_SINTOMAS}?id=${id}`;
+    const url = `${process.env.REACT_APP_URL_UPDATE_SYMPTOM}?id=${id}`;
 
     const params = {
       method: "PUT",
@@ -146,7 +141,7 @@ export default class UpdateSintomas extends Component {
     var id = 0;
     id = urlNavOrigin;
 
-    const url = `${URL_GET_ONE_SINTOMAS}?id=${id}`;
+    const url = `${process.env.REACT_APP_URL_GET_ONE_SYMPTOM}?id=${id}`;
 
     const params = {
       method: "GET",
@@ -192,7 +187,7 @@ export default class UpdateSintomas extends Component {
   confirmDelete = (e) => {
 
     
-    const url = `${URL_DELETE_SINTOMAS}?id=${this.state.sintoma.id}`;
+    const url = `${process.env.REACT_APP_URL_DELETE_SYMPTOM}?id=${this.state.sintoma.id}`;
 
     const params = {
       method: "DELETE",
@@ -219,11 +214,8 @@ export default class UpdateSintomas extends Component {
                       message: data.error.message,
                     },
                   });
-                } else {
-                  this.props.history.push({
-                    pathname: "/sintomas",
-                  });
                 }
+                window.location = "/sintomas";
               });
           },
         },

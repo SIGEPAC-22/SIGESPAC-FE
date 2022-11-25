@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
 import { Form } from "react-bootstrap";
-import {URL_ADD_SINTOMA} from "../../../utils/constant"
 import swal from 'sweetalert';
 
 import "./AddSintomas.scss";
@@ -30,7 +29,7 @@ export default class AddSintomas extends Component {
     const data = new FormData(evt.target);
     const payload = Object.fromEntries(data.entries());
 
-    const url = `${URL_ADD_SINTOMA}`;
+    const url = `${process.env.REACT_APP_URL_ADD_SYMPTOM}`;
 
     const params = {
       method: "POST",
