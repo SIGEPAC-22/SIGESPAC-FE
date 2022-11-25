@@ -6,13 +6,6 @@ import { confirmAlert } from "react-confirm-alert";
 import 'react-confirm-alert/src/react-confirm-alert.css'
 import swal from 'sweetalert';
 import Select from "react-select";
-import {
-  URL_UPDATE_PERSONAL ,
-  URL_GET_ONE_PERSONAL,
-  URL_DELETE_PERSONAL,
-  URL_GET_ALL_DOCUMENTETYPE,
-  URL_GET_ALL_TYPEUSER,
-} from "../../../utils/constant";
 import "./UpdatePersonal.scss";
 
 export default class UpdatePersonal extends Component {
@@ -72,7 +65,7 @@ export default class UpdatePersonal extends Component {
     var id = 0;
     id = urlNavOrigin;
 
-    const url = `${URL_UPDATE_PERSONAL}?id=${id}`;
+    const url = `${process.env.REACT_APP_URL_UPDATE_PERSONAL}?id=${id}`;
 
     const params = {
       method: "PUT",
@@ -158,7 +151,7 @@ export default class UpdatePersonal extends Component {
     var id = 0;
     id = urlNavOrigin;
 
-    const url = `${URL_GET_ONE_PERSONAL}?id=${id}`;
+    const url = `${process.env.REACT_APP_URL_GET_ONE_PERSONAL}?id=${id}`;
 
     const params = {
       method: "GET",
@@ -207,7 +200,7 @@ export default class UpdatePersonal extends Component {
     } else {
       this.setState({ isLoaded: true });
     }
-    fetch(URL_GET_ALL_DOCUMENTETYPE)
+    fetch(process.env.REACT_APP_URL_GET_ALL_DOCUMENT_TYPE)
       .then((response) => {
         return response.json();
       })
@@ -216,7 +209,7 @@ export default class UpdatePersonal extends Component {
         this.setState({ typeDocument: response });
       });
     ////////////////////////////////////////////////
-    fetch(URL_GET_ALL_TYPEUSER)
+    fetch(process.env.REACT_APP_URL_GET_ALL_TYPE_USER)
       .then((response) => {
         return response.json();
       })
@@ -241,7 +234,7 @@ export default class UpdatePersonal extends Component {
   };
 
   confirmDelete = () => {
-    const url = `${URL_DELETE_PERSONAL}?id=${this.state.personal.id}`;
+    const url = `${process.env.REACT_APP_URL_DELETE_PERSONAL}?id=${this.state.personal.id}`;
 
     const params = {
       method: "DELETE",

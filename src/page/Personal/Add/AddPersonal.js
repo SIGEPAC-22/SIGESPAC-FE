@@ -2,12 +2,6 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
 import { Form } from "react-bootstrap";
-import { 
-  URL_ADD_PERSONAL,
-  URL_GET_ALL_DOCUMENTETYPE,
-  URL_GET_ALL_PERSONALSEX,
-  URL_GET_ALL_TYPEUSER
- } from "../../../utils/constant";
 import swal from "sweetalert";
 import Select from "react-select";
 import "./AddPersonal.scss";
@@ -46,7 +40,7 @@ export default class AddPersonal extends Component {
     const data = new FormData(evt.target);
     const payload = Object.fromEntries(data.entries());
 
-    const url = `${URL_ADD_PERSONAL}`;
+    const url = `${process.env.REACT_APP_URL_ADD_PERSONAL}`;
     
 
     const params = {
@@ -128,7 +122,7 @@ export default class AddPersonal extends Component {
       isLoaded: true,
     });
     
-    fetch(URL_GET_ALL_DOCUMENTETYPE)
+    fetch(process.env.REACT_APP_URL_GET_ALL_DOCUMENT_TYPE)
       .then((response) => {
         return response.json();
       })
@@ -137,7 +131,7 @@ export default class AddPersonal extends Component {
         this.setState({ typeDocument: response });
       });
     ////////////////////////////////////////////////
-    fetch(URL_GET_ALL_PERSONALSEX)
+    fetch(process.env.REACT_APP_URL_GET_ALL_PERSONAL_SEX)
       .then((response) => {
         return response.json();
       })
@@ -145,7 +139,7 @@ export default class AddPersonal extends Component {
         this.setState({ sex: response });
       });
       ////////////////////////////////////////////////
-    fetch(URL_GET_ALL_TYPEUSER)
+    fetch(process.env.REACT_APP_URL_GET_ALL_TYPE_USER)
     .then((response) => {
       return response.json();
     })

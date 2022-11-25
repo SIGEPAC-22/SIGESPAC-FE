@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
-import { URL_GET_ONE_PERSONAL } from "../../../utils/constant";
 import "./DetailPersonal.scss";
 
 export default class DetailPersonal extends Component {
@@ -18,7 +17,7 @@ export default class DetailPersonal extends Component {
     var id = 0;
     id = urlNavOrigin
 
-    const url = `${URL_GET_ONE_PERSONAL}?id=${id}`;
+    const url = `${process.env.REACT_APP_URL_GET_ONE_PERSONAL}?id=${id}`;
 
     const params = {
       method: "GET",
