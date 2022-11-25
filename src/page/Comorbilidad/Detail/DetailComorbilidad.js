@@ -1,7 +1,6 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
-import { URL_GET_ONE_COMORBILIDAD } from "../../../utils/constant";
 import "./DetailComorbilidad.scss";
 
 export default class DetailComorbilida extends Component {
@@ -18,7 +17,7 @@ export default class DetailComorbilida extends Component {
     var id = 0;
     id = urlNavOrigin
 
-    const url = `${URL_GET_ONE_COMORBILIDAD}?id=${id}`;
+    const url = `${process.env.REACT_APP_URL_GET_ONE_COMORBIDITY}?id=${id}`;
 
     const params = {
       method: "GET",

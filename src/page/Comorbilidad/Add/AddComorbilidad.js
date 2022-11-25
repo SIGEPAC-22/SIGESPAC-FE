@@ -2,7 +2,6 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import BasicLayout from "../../../layout/BasicLayout";
 import { Form } from "react-bootstrap";
-import {URL_ADD_COMORBILIDAD} from "../../../utils/constant"
 import swal from 'sweetalert';
 
 import "./AddComorbilidad.scss";
@@ -30,7 +29,7 @@ export default class AddComorbilidad extends Component {
     const data = new FormData(evt.target);
     const payload = Object.fromEntries(data.entries());
 
-    const url = `${URL_ADD_COMORBILIDAD}`;
+    const url = `${process.env.REACT_APP_URL_ADD_COMORBIDITY}`;
 
     const params = {
       method: "POST",

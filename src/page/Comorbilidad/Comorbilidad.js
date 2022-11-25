@@ -1,8 +1,6 @@
 import React,{Component, Fragment} from 'react';
 import {Link } from 'react-router-dom'
 import BasicLayout from '../../layout/BasicLayout'
-import{ URL_GET_ALL_COMORBILIDAD } from "../../utils/constant";
-
 import './Comorbilidad.scss'
 
 export default class Comorbilidad extends Component {
@@ -13,7 +11,7 @@ export default class Comorbilidad extends Component {
   };
 
   componentDidMount() {
-    const url = `${URL_GET_ALL_COMORBILIDAD}`;
+    const url = `${process.env.REACT_APP_URL_GET_ALL_COMORBIDITY}`;
     const params ={
       method: "GET",
       headers: {

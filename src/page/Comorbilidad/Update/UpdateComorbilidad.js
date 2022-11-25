@@ -48,7 +48,7 @@ export default class UpdateComorbilidad extends Component {
     var id = 0;
     id = urlNavOrigin;
 
-    const url = `${URL_UPDATE_COMORBILIDAD}?id=${id}`;
+    const url = `${process.env.REACT_APP_URL_UPDATE_COMORBIDITY}?id=${id}`;
 
     const params = {
       method: "PUT",
@@ -117,7 +117,7 @@ export default class UpdateComorbilidad extends Component {
     var id = 0;
     id = urlNavOrigin;
 
-    const url = `${URL_GET_ONE_COMORBILIDAD}?id=${id}`;
+    const url = `${process.env.REACT_APP_URL_GET_ONE_COMORBIDITY}?id=${id}`;
 
     const params = {
       method: "GET",
@@ -161,7 +161,7 @@ export default class UpdateComorbilidad extends Component {
   }
 
   confirmDelete = () => {
-    const url = `${URL_DELETE_COMORBILIDAD}?id=${this.state.comorbilidad.id}`;
+    const url = `${process.env.REACT_APP_URL_DELETE_COMORBIDITY}?id=${this.state.comorbilidad.id}`;
 
     const params = {
       method: "DELETE",
