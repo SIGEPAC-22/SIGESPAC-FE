@@ -19,8 +19,14 @@ import UpdatePersonal from "../page/Personal/Update/UpdatePersonal";
 import Expediente from "../page/Expediente";
 import Historial from "../page/Historial";
 import DetailHistorial from "../page/Historial/Detail/DetailHistorial";
+import DetailExpediente from "../page/Expediente/Detail/DetailExpediente";
 
 export default[
+    {
+        path: "/detailexpediente/:id",
+        exact:true,
+        page: DetailExpediente
+    },
 
     {
         path: "/detailhistorial/:id",

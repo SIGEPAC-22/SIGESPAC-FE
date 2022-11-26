@@ -12,7 +12,7 @@ export default class Expediente extends Component {
   };
 
   componentDidMount() {
-    const url = `${process.env.REACT_APP_URL_GET_ALL_PERSONAL}`;
+    const url = `${process.env.REACT_APP_URL_GET_ALL_PATIENT_FILE}`;
     const params = {
       method: "GET",
       headers: {
@@ -30,7 +30,7 @@ export default class Expediente extends Component {
           }
           console.log(result)
           this.setState({
-            getPersonal: result,
+            getExpediente: result,
             isLoaded: true,
           });
         },
@@ -44,8 +44,8 @@ export default class Expediente extends Component {
   }
 
   render() {
-    const { getPersonal, isLoaded, error } = this.state;
-
+    const { getExpediente, isLoaded, error } = this.state;
+      console.log(getExpediente)
     if (error) {
       return (
         <div>
@@ -68,11 +68,6 @@ export default class Expediente extends Component {
             <br />
             <div class={"container"}>
               <div class={"row"}>
-                <div class={"col-lg-12"}>
-                  <Link className={"btn btn-success"} to={`/addpersonal`}>
-                    {"Agregar"}
-                  </Link>
-                </div>
               </div>
             </div>
             <br />
@@ -87,44 +82,58 @@ export default class Expediente extends Component {
                     >
                       <thead class={"text-center"}>
                         <tr>
-                          <th className="text-light">Nombres</th>
-                          <th className="text-light">Apellidos</th>
-                          <th className="text-light">Fecha de Nacimiento</th>
+                          <th className="text-light">Nombre completo</th>
+                          <th className="text-light">Tipo de documento</th>
                           <th className="text-light">Nº Documento</th>
-                          <th className="text-light">Usuario</th>
+                          <th className="text-light">Fecha de ingreso</th>
+                          <th className="text-light">Fecha de Alta</th>
+                          <th className="text-light">Fecha de baja</th>
+                          <th className="text-light">Comorbilidades</th>
+                          <th className="text-light">Sintomas</th>
                           <th className="text-light">Acciones</th>
                         </tr>
                       </thead>
                       <tbody>
-                        {getPersonal.map((gt) => (
+                        {getExpediente.map((gt) => (
                           <tr>
-                            <td className="text-light" key={gt.id}>
-                              {gt.firstName} {gt.secondName}
+                            <td className="text-light" key={gt.idPatientFile}>
+                              {gt.fullName}
                             </td>
-                            <td className="text-light" key={gt.id}>
-                              {gt.lastName} {gt.secondLastName}
+                            <td className="text-light" key={gt.idPatientFile}>
+                              {gt.documentType} 
                             </td>
-                            <td className="text-light" key={gt.id}>
-                              {gt.dateOfBirth}
-                            </td>
-                            <td className="text-light" key={gt.id}>
+                            <td className="text-light" key={gt.idPatientFile}>
                               {gt.documentNumber}
                             </td>
-                            <td className="text-light" key={gt.id}>
-                              {gt.user}
+                            <td className="text-light" key={gt.idPatientFile}>
+                              {gt.admissionDate}
                             </td>
+                            <td className="text-light" key={gt.idPatientFile}>
+                              {gt.highDate}
+                            </td>
+                            <td className="text-light" key={gt.idPatientFile}>
+                              {gt.highDate}
+                            </td>
+                            <td className="text-light" key={gt.idPatientFile}>
+                            {gt.comorbidity.join(', \n')}
+                            </td>
+                          
+                            <td className="text-light" key={gt.idPatientFile}>
+                            {gt.symptom.join(', \n')}
+                              <br/>
+                            </td> 
                             <td>
                               <div class={"text-center"}>
                                 <div class={"btn-group"}>
                                   <Link
                                     className={"btn btn-primary btnEditar"}
-                                    to={`/updatepersonal/${gt.id}`}
+                                    to={`/updateexpediente/${gt.idPatientFile}`}
                                   >
                                     {"Editar"}
                                   </Link>
                                   <Link
                                     className={"btn btn-secondary btnDetalle"}
-                                    to={`/detailpersonal/${gt.id}`}
+                                    to={`/detailexpediente/${gt.idPatientFile}`}
                                   >
                                     {"Detalle"}
                                   </Link>
