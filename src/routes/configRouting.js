@@ -20,8 +20,15 @@ import Expediente from "../page/Expediente";
 import Historial from "../page/Historial";
 import DetailHistorial from "../page/Historial/Detail/DetailHistorial";
 import DetailExpediente from "../page/Expediente/Detail/DetailExpediente";
+import UpdateExpediente from "../page/Expediente/Update/UpdateExpediente";
+
 
 export default[
+    {
+        path: "/updateexpediente/:id",
+        exact:true,
+        page: UpdateExpediente
+    },
     {
         path: "/detailexpediente/:id",
         exact:true,

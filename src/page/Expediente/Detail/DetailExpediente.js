@@ -135,6 +135,14 @@ export default class DetailExpediente extends Component {
                   </tr>
                   <tr>
                     <td className="fw-bold text-light fs-5">
+                      Embarazo:
+                    </td>
+                    <td className="text-light fs-5">
+                      {getOneExpediente.pregnant}
+                    </td>
+                  </tr>
+                  <tr>
+                    <td className="fw-bold text-light fs-5">
                     Estado del paciente:
                     </td>
                     <td className="text-light fs-5">
