@@ -112,7 +112,7 @@ export default class Expediente extends Component {
                               {gt.highDate}
                             </td>
                             <td className="text-light" key={gt.idPatientFile}>
-                              {gt.highDate}
+                              {gt.lowDate}
                             </td>
                             <td className="text-light" key={gt.idPatientFile}>
                             {gt.comorbidity.join(', \n')}

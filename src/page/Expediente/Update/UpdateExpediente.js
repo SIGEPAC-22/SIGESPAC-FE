@@ -70,7 +70,7 @@ export default class UpdateExpediente extends Component {
     var id = 0;
     id = urlNavOrigin;
 
-    const url = `${process.env.REACT_APP_URL_UPDATE_PATIENT}?id=${id}`;
+    const url = `${process.env.REACT_APP_URL_UPDATE_PATIENT_FILE}?idpatient=${id}&idPatientFile=${id}`;
 
     const params = {
       method: "PUT",
@@ -157,7 +157,6 @@ export default class UpdateExpediente extends Component {
     id = urlNavOrigin;
 
     const url = `${process.env.REACT_APP_URL_GET_ONE_PATIENT_FILE}?id=${id}`;
-
     const params = {
       method: "GET",
       headers: {
@@ -262,7 +261,9 @@ export default class UpdateExpediente extends Component {
   handleChangeComorbidity = (selectedOptionComorbidity) => {
     this.setState({
       selectedOptionComorbidity,
+
     });
+    console.log(selectedOptionComorbidity)
   };
 
   handleChangeSymptom = (selectedOptionSymptom) => {
@@ -271,8 +272,11 @@ export default class UpdateExpediente extends Component {
     });
   };
 
+ 
+
   render() {
     let { expediente, isLoaded, error } = this.state;
+    console.log(expediente.comorbidity[0])
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -417,14 +421,14 @@ export default class UpdateExpediente extends Component {
                         <label className="labeld">Estado del paciente</label>
                           <Select
                             className="Selectd"
-                            name="documentType"
+                            name="statePatient"
                             options={this.state.statePatient.map((elemento) => {
                               return {
                                 value: `${elemento.id}`,
                                 label: `${elemento.nameStatePatient}`,
                               };
                             })}
-                            placeholder="Tipo de documento"
+                            placeholder="Estado del paciente"
                             //value={this.state.selectedOptionTypeDocument}
                             defaultValue={{ label: expediente.statePatient }}
                             onChange={this.handleChangeStatePatient}
@@ -465,11 +469,13 @@ export default class UpdateExpediente extends Component {
                             })}
                             isMulti
                             placeholder="Comorbilidades"
-                            //value={this.state.selectedOptionTypeDocument}
-                            defaultValue={{ label: expediente.comorbidity }}
+                            defaultValue={expediente.comorbidity.map(function(elemento, indice){
+                              return{
+                              label:`${elemento[indice]}`,
+                              };
+                            })}
                             onChange={this.handleChangeComorbidity}
                             closeMenuOnSelect={true}
-                            required
                           />
                         </Form.Group>
                         <Form.Group>
@@ -484,12 +490,11 @@ export default class UpdateExpediente extends Component {
                               };
                             })}
                             isMulti
-                            placeholder="Comorbilidades"
+                            placeholder="Sintomas"
                             //value={this.state.selectedOptionTypeDocument}
                             defaultValue={{ label: expediente.symptom }}
                             onChange={this.handleChangeSymptom}
                             closeMenuOnSelect={true}
-                            required
                           />
                         </Form.Group>
 
