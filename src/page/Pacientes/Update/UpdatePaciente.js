@@ -303,7 +303,6 @@ export default class UpdatePaciente extends Component {
                             placeholder="Segundo nombre"
                             onChange={this.handleChange}
                             defaultValue={paciente.secondName}
-                            required
                           />
                         </Form.Group>
 

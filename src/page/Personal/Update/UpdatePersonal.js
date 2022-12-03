@@ -330,7 +330,6 @@ export default class UpdatePersonal extends Component {
                             placeholder="Segundo nombre"
                             onChange={this.handleChange}
                             defaultValue={personal.secondName}
-                            required
                           />
                         </Form.Group>
 
