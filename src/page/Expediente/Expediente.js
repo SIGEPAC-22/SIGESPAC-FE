@@ -28,7 +28,6 @@ export default class Expediente extends Component {
           if (result === null) {
             result = [];
           }
-          console.log(result)
           this.setState({
             getExpediente: result,
             isLoaded: true,
@@ -45,7 +44,6 @@ export default class Expediente extends Component {
 
   render() {
     const { getExpediente, isLoaded, error } = this.state;
-      console.log(getExpediente)
     if (error) {
       return (
         <div>
@@ -112,7 +110,7 @@ export default class Expediente extends Component {
                               {gt.highDate}
                             </td>
                             <td className="text-light" key={gt.idPatientFile}>
-                              {gt.highDate}
+                              {gt.lowDate}
                             </td>
                             <td className="text-light" key={gt.idPatientFile}>
                             {gt.comorbidity.join(', \n')}

@@ -24,7 +24,7 @@ export default class UpdateExpediente extends Component {
         statePatient:"",
         highDate:"",
         lowDate:"",
-        comorbidity:[],
+        comorbidity:this.setState.selectedOptionComorbidity,
         symptom:[]
       },
       isLoaded: false,
@@ -49,7 +49,6 @@ export default class UpdateExpediente extends Component {
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-
     let errors = [];
     if (this.state.expediente.fullName === "") {
       errors.push("fullName");
@@ -61,16 +60,24 @@ export default class UpdateExpediente extends Component {
       return false;
     }
 
-    const data = new FormData(evt.target);
-    const payload = Object.fromEntries(data.entries());
+    const data1 ={
+      idPatient: this.state.expediente.idPatient.toString(),
+      idPatientFile: this.state.expediente.idPatientFile.toString(),
+      statePatient: this.state.selectedOptionStatePatient,
+      highDate:this.state.expediente.highDate,
+      lowDate: this.state.expediente.lowDate,
+      comorbidity: this.state.selectedOptionComorbidity,
+      symptom: this.state.selectedOptionSymptom,
+    }
 
+    console.log(data1);
     let urlNav = window.location.href;
     let saludoArray = urlNav.split("/");
     let urlNavOrigin = saludoArray[saludoArray.length - 1];
     var id = 0;
     id = urlNavOrigin;
 
-    const url = `${process.env.REACT_APP_URL_UPDATE_PATIENT}?id=${id}`;
+    const url = `${process.env.REACT_APP_URL_UPDATE_PATIENT_FILE}?idPatient=${id}&idPatientFile=${id}`;
 
     const params = {
       method: "PUT",
@@ -78,7 +85,7 @@ export default class UpdateExpediente extends Component {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(data1),
     };
 
     fetch(url, params)
@@ -110,7 +117,7 @@ export default class UpdateExpediente extends Component {
               timer: "2000",
               buttons: false,
             }).then(function () {
-              window.location = "/expediente";
+              
             });
           });
         }
@@ -157,7 +164,6 @@ export default class UpdateExpediente extends Component {
     id = urlNavOrigin;
 
     const url = `${process.env.REACT_APP_URL_GET_ONE_PATIENT_FILE}?id=${id}`;
-
     const params = {
       method: "GET",
       headers: {
@@ -210,15 +216,6 @@ export default class UpdateExpediente extends Component {
     } else {
       this.setState({ isLoaded: true });
     }
-       ////////////////////////////////////////////////
-    fetch(process.env.REACT_APP_URL_GET_ALL_PATIENT_SEX)
-    .then((response) => {
-      return response.json();
-    })
-    .then((response) => {
-      this.setState({ sex: response });
-    });
-      
     ////////////////////////////////////////////////
     fetch(process.env.REACT_APP_URL_GET_ALL_STATE_PATIENT)
       .then((response) => {
@@ -247,21 +244,17 @@ export default class UpdateExpediente extends Component {
     });
   }
 
-  handleChangeSex = (selectedOptionSex) => {
-    this.setState({
-      selectedOptionSex,
-    });
-  };
 
   handleChangeStatePatient = (selectedOptionStatePatient) => {
     this.setState({
       selectedOptionStatePatient,
     });
+    console.log(selectedOptionStatePatient)
   };
 
   handleChangeComorbidity = (selectedOptionComorbidity) => {
     this.setState({
-      selectedOptionComorbidity,
+      selectedOptionComorbidity
     });
   };
 
@@ -270,6 +263,8 @@ export default class UpdateExpediente extends Component {
       selectedOptionSymptom,
     });
   };
+
+ 
 
   render() {
     let { expediente, isLoaded, error } = this.state;
@@ -368,28 +363,18 @@ export default class UpdateExpediente extends Component {
                             }
                           />
                           </Form.Group>
+
                           <Form.Group>
-                          <label className="labeld">Sexo del paciente</label>
-                            <Select
-                              isDisabled="true"
-                              className="Selectd"
-                              name="sex"
-                              options={this.state.sex.map(
-                                (elemento) => {
-                                  return {
-                                    value: `${elemento.id}`,
-                                    label: `${elemento.nameSex}`,
-                                  };
-                                }
-                              )}
-                              placeholder="seleccione sexo"
-                              //value={this.state.selectedOptionTypeDocument}
-                              defaultValue={{ label: expediente.sex }}
-                              onChange={this.handleChangeSex}
-                              closeMenuOnSelect={true}
-                              required
-                            />
-                          </Form.Group>
+                        <label className="labeld">Sexo del paciente</label>
+                          <Form.Control
+                           disabled="true"
+                            type="text"
+                            name="sex"
+                            placeholder="Sexo"
+                            onChange={this.handleChange}
+                            defaultValue={expediente.sex}
+                          />
+                        </Form.Group>
                         
                         <Form.Group>
                         <label className="labeld">Estado de Embarazo</label>
@@ -417,15 +402,14 @@ export default class UpdateExpediente extends Component {
                         <label className="labeld">Estado del paciente</label>
                           <Select
                             className="Selectd"
-                            name="documentType"
+                            name="statePatient"
                             options={this.state.statePatient.map((elemento) => {
                               return {
                                 value: `${elemento.id}`,
                                 label: `${elemento.nameStatePatient}`,
                               };
                             })}
-                            placeholder="Tipo de documento"
-                            //value={this.state.selectedOptionTypeDocument}
+                            placeholder="Estado del paciente"
                             defaultValue={{ label: expediente.statePatient }}
                             onChange={this.handleChangeStatePatient}
                             closeMenuOnSelect={true}
@@ -456,7 +440,7 @@ export default class UpdateExpediente extends Component {
                         <label className="labeld">Comorbilidades</label>
                           <Select
                             className="Selectd"
-                            name="documentType"
+                            name="comorbidity"
                             options={this.state.comorbidity.map((elemento) => {
                               return {
                                 value: `${elemento.id}`,
@@ -465,18 +449,16 @@ export default class UpdateExpediente extends Component {
                             })}
                             isMulti
                             placeholder="Comorbilidades"
-                            //value={this.state.selectedOptionTypeDocument}
-                            defaultValue={{ label: expediente.comorbidity }}
+                            value={this.state.selectedOptionComorbidity}
                             onChange={this.handleChangeComorbidity}
                             closeMenuOnSelect={true}
-                            required
                           />
                         </Form.Group>
                         <Form.Group>
                         <label className="labeld">Sintomas</label>
                           <Select
                             className="Selectd"
-                            name="documentType"
+                            name="symptom"
                             options={this.state.symptom.map((elemento) => {
                               return {
                                 value: `${elemento.id}`,
@@ -484,12 +466,9 @@ export default class UpdateExpediente extends Component {
                               };
                             })}
                             isMulti
-                            placeholder="Comorbilidades"
-                            //value={this.state.selectedOptionTypeDocument}
-                            defaultValue={{ label: expediente.symptom }}
+                            placeholder="Sintomas"
                             onChange={this.handleChangeSymptom}
                             closeMenuOnSelect={true}
-                            required
                           />
                         </Form.Group>
 
