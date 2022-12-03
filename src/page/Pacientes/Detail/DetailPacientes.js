@@ -76,7 +76,7 @@ export default class DetailPacientes extends Component {
                 <tbody>
                   <tr>
                     <td className="fw-bold text-light fs-5">
-                      Nombre :
+                      Nombres :
                     </td>
                     <td className="text-light fs-5">
                       {getOnePaciente.firstName} {getOnePaciente.secondName}
