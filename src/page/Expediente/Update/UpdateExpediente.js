@@ -63,14 +63,14 @@ export default class UpdateExpediente extends Component {
 
     const data = new FormData(evt.target);
     const payload = Object.fromEntries(data.entries());
-
+      console.log(payload)
     let urlNav = window.location.href;
     let saludoArray = urlNav.split("/");
     let urlNavOrigin = saludoArray[saludoArray.length - 1];
     var id = 0;
     id = urlNavOrigin;
 
-    const url = `${process.env.REACT_APP_URL_UPDATE_PATIENT_FILE}?idpatient=${id}&idPatientFile=${id}`;
+    const url = `${process.env.REACT_APP_URL_UPDATE_PATIENT_FILE}?idPatient=${id}&idPatientFile=${id}`;
 
     const params = {
       method: "PUT",
@@ -460,7 +460,7 @@ export default class UpdateExpediente extends Component {
                         <label className="labeld">Comorbilidades</label>
                           <Select
                             className="Selectd"
-                            name="documentType"
+                            name="comorbidity"
                             options={this.state.comorbidity.map((elemento) => {
                               return {
                                 value: `${elemento.id}`,
@@ -482,7 +482,7 @@ export default class UpdateExpediente extends Component {
                         <label className="labeld">Sintomas</label>
                           <Select
                             className="Selectd"
-                            name="documentType"
+                            name="symptom"
                             options={this.state.symptom.map((elemento) => {
                               return {
                                 value: `${elemento.id}`,
