@@ -24,7 +24,7 @@ export default class UpdateExpediente extends Component {
         statePatient:"",
         highDate:"",
         lowDate:"",
-        comorbidity:[],
+        comorbidity:this.setState.selectedOptionComorbidity,
         symptom:[]
       },
       isLoaded: false,
@@ -49,7 +49,6 @@ export default class UpdateExpediente extends Component {
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-
     let errors = [];
     if (this.state.expediente.fullName === "") {
       errors.push("fullName");
@@ -61,9 +60,17 @@ export default class UpdateExpediente extends Component {
       return false;
     }
 
-    const data = new FormData(evt.target);
-    const payload = Object.fromEntries(data.entries());
-      console.log(payload)
+    const data1 ={
+      idPatient: this.state.expediente.idPatient.toString(),
+      idPatientFile: this.state.expediente.idPatientFile.toString(),
+      statePatient: this.state.selectedOptionStatePatient,
+      highDate:this.state.expediente.highDate,
+      lowDate: this.state.expediente.lowDate,
+      comorbidity: this.state.selectedOptionComorbidity,
+      symptom: this.state.selectedOptionSymptom,
+    }
+
+    console.log(data1);
     let urlNav = window.location.href;
     let saludoArray = urlNav.split("/");
     let urlNavOrigin = saludoArray[saludoArray.length - 1];
@@ -78,7 +85,7 @@ export default class UpdateExpediente extends Component {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(payload),
+      body: JSON.stringify(data1),
     };
 
     fetch(url, params)
@@ -110,7 +117,7 @@ export default class UpdateExpediente extends Component {
               timer: "2000",
               buttons: false,
             }).then(function () {
-              window.location = "/expediente";
+              
             });
           });
         }
@@ -256,14 +263,13 @@ export default class UpdateExpediente extends Component {
     this.setState({
       selectedOptionStatePatient,
     });
+    console.log(selectedOptionStatePatient)
   };
 
   handleChangeComorbidity = (selectedOptionComorbidity) => {
     this.setState({
-      selectedOptionComorbidity,
-
+      selectedOptionComorbidity
     });
-    console.log(selectedOptionComorbidity)
   };
 
   handleChangeSymptom = (selectedOptionSymptom) => {
@@ -276,7 +282,6 @@ export default class UpdateExpediente extends Component {
 
   render() {
     let { expediente, isLoaded, error } = this.state;
-    console.log(expediente.comorbidity[0])
 
     if (error) {
       return <div>Error: {error.message}</div>;
@@ -429,7 +434,6 @@ export default class UpdateExpediente extends Component {
                               };
                             })}
                             placeholder="Estado del paciente"
-                            //value={this.state.selectedOptionTypeDocument}
                             defaultValue={{ label: expediente.statePatient }}
                             onChange={this.handleChangeStatePatient}
                             closeMenuOnSelect={true}
@@ -469,11 +473,7 @@ export default class UpdateExpediente extends Component {
                             })}
                             isMulti
                             placeholder="Comorbilidades"
-                            defaultValue={expediente.comorbidity.map(function(elemento, indice){
-                              return{
-                              label:`${elemento[indice]}`,
-                              };
-                            })}
+                            value={this.state.selectedOptionComorbidity}
                             onChange={this.handleChangeComorbidity}
                             closeMenuOnSelect={true}
                           />
