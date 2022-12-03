@@ -216,15 +216,6 @@ export default class UpdateExpediente extends Component {
     } else {
       this.setState({ isLoaded: true });
     }
-       ////////////////////////////////////////////////
-    fetch(process.env.REACT_APP_URL_GET_ALL_PATIENT_SEX)
-    .then((response) => {
-      return response.json();
-    })
-    .then((response) => {
-      this.setState({ sex: response });
-    });
-      
     ////////////////////////////////////////////////
     fetch(process.env.REACT_APP_URL_GET_ALL_STATE_PATIENT)
       .then((response) => {
@@ -253,11 +244,6 @@ export default class UpdateExpediente extends Component {
     });
   }
 
-  handleChangeSex = (selectedOptionSex) => {
-    this.setState({
-      selectedOptionSex,
-    });
-  };
 
   handleChangeStatePatient = (selectedOptionStatePatient) => {
     this.setState({
@@ -377,28 +363,18 @@ export default class UpdateExpediente extends Component {
                             }
                           />
                           </Form.Group>
+
                           <Form.Group>
-                          <label className="labeld">Sexo del paciente</label>
-                            <Select
-                              isDisabled="true"
-                              className="Selectd"
-                              name="sex"
-                              options={this.state.sex.map(
-                                (elemento) => {
-                                  return {
-                                    value: `${elemento.id}`,
-                                    label: `${elemento.nameSex}`,
-                                  };
-                                }
-                              )}
-                              placeholder="seleccione sexo"
-                              //value={this.state.selectedOptionTypeDocument}
-                              defaultValue={{ label: expediente.sex }}
-                              onChange={this.handleChangeSex}
-                              closeMenuOnSelect={true}
-                              required
-                            />
-                          </Form.Group>
+                        <label className="labeld">Sexo del paciente</label>
+                          <Form.Control
+                           disabled="true"
+                            type="text"
+                            name="sex"
+                            placeholder="Sexo"
+                            onChange={this.handleChange}
+                            defaultValue={expediente.sex}
+                          />
+                        </Form.Group>
                         
                         <Form.Group>
                         <label className="labeld">Estado de Embarazo</label>
@@ -491,8 +467,6 @@ export default class UpdateExpediente extends Component {
                             })}
                             isMulti
                             placeholder="Sintomas"
-                            //value={this.state.selectedOptionTypeDocument}
-                            defaultValue={{ label: expediente.symptom }}
                             onChange={this.handleChangeSymptom}
                             closeMenuOnSelect={true}
                           />
